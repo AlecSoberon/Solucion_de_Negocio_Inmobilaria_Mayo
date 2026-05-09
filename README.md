@@ -4,7 +4,7 @@ Portafolio web del proyecto de análisis del ratio de conversión comercial para
 
 ## Objetivo
 
-Documentar la solución analítica del proyecto Villa Verde, incluyendo el caso de negocio, modelo de datos, arquitectura propuesta, dashboard en Power BI y oportunidades de automatización.
+Documentar la solución analítica del proyecto Villa Verde, incluyendo el caso de negocio, modelo de datos, aplicación web, arquitectura cloud, procesos ETL, Warehouse, modelo semántico, dashboard en Power BI y automatizaciones de notificación.
 
 ## Estructura
 
@@ -31,8 +31,6 @@ El sitio se publica con GitHub Pages desde la rama `main`.
 
 ## Pendientes recomendados
 
-- Agregar captura o diagrama final de arquitectura cloud.
-- Agregar evidencias reales de Microsoft Fabric.
-- Agregar capturas de Power Apps.
-- Agregar capturas de Power Automate y correo de prueba.
-- Validar que el enlace público de Power BI siga activo.
+- Validar que el enlace embebido de Power BI/Fabric siga activo.
+- Reemplazar el prototipo de aplicación por capturas finales si el equipo entrega la versión conectada a base de datos.
+- Evitar publicar credenciales, tokens o app passwords en notebooks o capturas.

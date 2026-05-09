@@ -176,3 +176,50 @@ tr:last-child td { border-bottom: 0; }
 .kpi-strip .mini-card { text-align: center; }
 @media (max-width: 980px) { .kpi-strip { grid-template-columns: 1fr 1fr; } .embed-frame iframe { min-height: 420px; } }
 @media (max-width: 640px) { .kpi-strip { grid-template-columns: 1fr; } .embed-frame iframe { min-height: 360px; } }
+
+/* Demo de aplicación comercial */
+.app-shell {
+  background: #f8fbff;
+  border: 1px solid #d8e7fb;
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  margin-top: 18px;
+}
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--primary-3), var(--primary));
+  color: white;
+}
+.app-toolbar strong { letter-spacing: -0.01em; }
+.app-status { display: inline-flex; align-items: center; gap: 8px; font-size: 0.86rem; font-weight: 800; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 999px; }
+.app-body { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 18px; padding: 18px; }
+.app-panel, .app-preview { background: white; border: 1px solid #e1e9f5; border-radius: 18px; padding: 18px; }
+.app-form { display: grid; gap: 12px; }
+.form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.app-form label { display: grid; gap: 5px; font-weight: 800; color: var(--primary); font-size: 0.9rem; }
+.app-form input, .app-form select, .app-form textarea {
+  width: 100%;
+  border: 1px solid #d9e3f1;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: #fbfdff;
+}
+.app-form textarea { min-height: 80px; resize: vertical; }
+.app-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.app-table th { background: #eef5ff; }
+.app-table td, .app-table th { padding: 10px; border-bottom: 1px solid #e5ecf5; }
+.stage-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 4px; }
+.stage-tab { border: 1px solid #d8e7fb; background: white; color: var(--primary); padding: 8px 11px; border-radius: 999px; font-weight: 900; cursor: default; }
+.stage-tab.active { background: #e8f1ff; border-color: #bcd5f6; }
+.prototype-note { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
+@media (max-width: 900px) {
+  .app-body { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
