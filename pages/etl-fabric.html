@@ -7,43 +7,304 @@
   <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 <body>
-  <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
-  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a href="data-layer.html">Data</a></li><li><a class="active" href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
-  
+  <div class="topbar">
+    <div class="container">
+      <small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="caso-negocio.html">Caso</a></li>
+        <li><a href="arquitectura.html">Arquitectura</a></li>
+        <li><a href="data-layer.html">Data</a></li>
+        <li><a class="active" href="etl-fabric.html">Fabric</a></li>
+        <li><a href="powerapps.html">Aplicación</a></li>
+        <li><a href="powerbi.html">Power BI</a></li>
+        <li><a href="automatizacion.html">Automatización</a></li>
+        <li><a href="equipo.html">Equipo</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <main class="container">
 
     <section>
-      <h2>ETL y Microsoft Fabric</h2>
-      <p class="lead">Esta página está lista para documentar cómo los datos pasan desde las fuentes comerciales hacia el modelo analítico usado por Power BI.</p>
+      <span class="eyebrow">Capa 3 · ETL y Fabric Data Factory</span>
+      <h2>Pipeline de extracción, transformación y carga</h2>
+      <p class="lead">
+        La capa ETL permite trasladar la información comercial desde la base operacional hacia un entorno analítico en Microsoft Fabric. Para ello, se construyó un pipeline compuesto por múltiples dataflows, donde cada flujo procesa una tabla específica del modelo relacional de Inmobiliaria Mayo.
+      </p>
       <div class="grid-3">
-        <div class="card"><h3>Extracción</h3><p>Lectura de archivos, tablas SQL o fuentes operativas con datos de leads, ventas y costos.</p></div>
-        <div class="card"><h3>Transformación</h3><p>Limpieza de fechas, estandarización de estados, creación de llaves y cálculo de columnas auxiliares.</p></div>
-        <div class="card"><h3>Carga</h3><p>Publicación de tablas finales en warehouse/lakehouse o modelo semántico para consumo en Power BI.</p></div>
+        <div class="card">
+          <h3>Extracción</h3>
+          <p>Lectura de tablas comerciales almacenadas en Azure SQL Database, incluyendo proyectos, torres, unidades, clientes, vendedores, canales, leads y contratos.</p>
+        </div>
+        <div class="card">
+          <h3>Transformación</h3>
+          <p>Preparación de los datos mediante Power Query / Dataflows, respetando nombres de campos, tipos de datos, llaves y dependencias entre entidades.</p>
+        </div>
+        <div class="card">
+          <h3>Carga</h3>
+          <p>Envío de las tablas procesadas hacia Fabric Warehouse, para su posterior integración con el modelo analítico y los dashboards en Power BI.</p>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Pipeline sugerido</h2>
+      <h2>Vista general del pipeline</h2>
+      <p>
+        El pipeline fue construido como una secuencia de flujos de datos. Primero se cargan los catálogos y entidades base, luego las tablas dependientes, y finalmente las tablas transaccionales que concentran el proceso comercial. Esta lógica reduce errores de carga y conserva la consistencia del modelo relacional.
+      </p>
+      <div class="image-frame">
+        <img src="../assets/img/Pipeline_Fabric.png" alt="Pipeline ETL en Microsoft Fabric Data Factory" />
+        <p class="caption">Pipeline ETL desarrollado en Microsoft Fabric Data Factory para la carga secuencial de tablas del modelo comercial inmobiliario.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Dataflows implementados</h2>
+      <p>
+        Cada dataflow cumple la función de extraer una tabla específica desde la base relacional, navegar hacia el objeto correspondiente y configurar su destino en Fabric Warehouse. Para documentar la lógica del proceso, se muestran dos ejemplos: un catálogo simple y la tabla transaccional principal del modelo.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Dataflow de catálogo: Estado_Contrato</h3>
+          <p>
+            Este flujo evidencia la conexión con Azure SQL Database, la navegación hacia la tabla <strong>G5.Estado_Contrato</strong> y el destino configurado en Warehouse. Representa una carga de catálogo usada para clasificar el estado y vigencia de los contratos.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Dataflow transaccional: Lead_Venta</h3>
+          <p>
+            Este flujo procesa la tabla central del funnel comercial. En ella se integran el cliente, unidad de interés, asesor asignado, canal de origen, fecha del lead, costo, descuento ofrecido y precio de venta ofertado.
+          </p>
+        </div>
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Dataflow_Estado_Contrato.png" alt="Dataflow de Estado Contrato en Fabric" />
+        <p class="caption">Dataflow de la tabla G5.Estado_Contrato: conexión a Azure SQL, navegación hacia la tabla fuente y destino en Fabric Warehouse.</p>
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Dataflow_Lead_Venta.png" alt="Dataflow de Lead Venta en Fabric" />
+        <p class="caption">Dataflow de la tabla G5.Lead_Venta: vista previa de los registros de la tabla transaccional principal del proceso comercial.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Flujo lógico de procesamiento</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <span>1</span>
+          <h4>Catálogos base</h4>
+          <p>Se cargan tablas de referencia como estados, tipos de unidad y propiedad del canal.</p>
+        </div>
+        <div class="flow-step">
+          <span>2</span>
+          <h4>Entidades inmobiliarias</h4>
+          <p>Se procesan proyectos, torres y unidades, respetando la relación entre proyecto, torre y unidad.</p>
+        </div>
+        <div class="flow-step">
+          <span>3</span>
+          <h4>Entidades comerciales</h4>
+          <p>Se cargan clientes, vendedores y canales, que explican el origen y gestión de cada oportunidad.</p>
+        </div>
+        <div class="flow-step">
+          <span>4</span>
+          <h4>Tabla central</h4>
+          <p>Se procesa Lead_Venta como núcleo transaccional del funnel comercial.</p>
+        </div>
+        <div class="flow-step">
+          <span>5</span>
+          <h4>Control de ejecución</h4>
+          <p>Se activan notebooks para notificar el resultado del proceso: actualización exitosa o error.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Notebooks de notificación</h2>
+      <p>
+        Además de los dataflows, el pipeline incorpora notebooks en Fabric para comunicar el estado final de la ejecución. Se implementaron dos rutas: una para notificar una actualización exitosa de las tablas y otra para notificar errores en caso falle alguna etapa del proceso.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Correo de éxito</h3>
+          <p>
+            Envía una notificación cuando todas las tablas del modelo semántico fueron actualizadas sin errores. Esta evidencia permite demostrar el uso de Python dentro de Fabric para tareas operativas posteriores a la carga.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Correo de error</h3>
+          <p>
+            Envía una notificación cuando una o más tablas fallan durante la actualización. El mensaje incluye una estructura para reportar el detalle del error y facilitar la revisión de la ejecución.
+          </p>
+        </div>
+      </div>
+      <div class="callout warning">
+        <strong>Nota de seguridad:</strong> las capturas de los notebooks fueron publicadas con credenciales y correos ocultos. No se deben exponer usuarios, contraseñas ni app passwords en un portafolio público de GitHub Pages.
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Notebook_Correo_Exito_Redactado.png" alt="Notebook de correo de éxito en Fabric" />
+        <p class="caption">Notebook de notificación de éxito: envío de correo cuando la actualización de tablas finaliza correctamente.</p>
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Notebook_Correo_Error_Redactado.png" alt="Notebook de correo de error en Fabric" />
+        <p class="caption">Notebook de notificación de error: envío de correo cuando el pipeline identifica fallas en la actualización.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Componentes del pipeline</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Paso</th><th>Descripción</th><th>Validación</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Tipo</th>
+              <th>Función dentro del ETL</th>
+              <th>Dependencia principal</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>01. Ingesta</td><td>Cargar datos crudos de leads, ventas, proyectos, canales y costos.</td><td>Conteo de filas vs fuente original.</td></tr>
-            <tr><td>02. Limpieza</td><td>Homologar fechas, estados de venta, nombres de canal y vendedores.</td><td>Valores nulos, duplicados y formatos.</td></tr>
-            <tr><td>03. Modelado</td><td>Separar dimensiones y hechos para análisis.</td><td>Integridad de llaves y relaciones.</td></tr>
-            <tr><td>04. Métricas</td><td>Preparar campos para cálculo de leads, ventas y conversión.</td><td>Comparación con resultados esperados.</td></tr>
-            <tr><td>05. Publicación</td><td>Actualizar dataset/modelo semántico conectado a Power BI.</td><td>Refresh exitoso y datos visibles en dashboard.</td></tr>
+            <tr>
+              <td>Estado_Torre</td>
+              <td>Catálogo</td>
+              <td>Carga los estados disponibles para las torres.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Proyectos</td>
+              <td>Entidad base</td>
+              <td>Carga información general de cada proyecto inmobiliario.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Torres</td>
+              <td>Entidad dependiente</td>
+              <td>Carga torres asociadas a proyectos y estados de torre.</td>
+              <td>Proyectos y Estado_Torre.</td>
+            </tr>
+            <tr>
+              <td>Estado_Unidad</td>
+              <td>Catálogo</td>
+              <td>Carga los estados comerciales de las unidades inmobiliarias.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Tipos_Unidad</td>
+              <td>Catálogo</td>
+              <td>Carga la clasificación de unidades según características físicas.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Unidades</td>
+              <td>Entidad dependiente</td>
+              <td>Carga las unidades disponibles, su precio, metraje, piso y estado.</td>
+              <td>Torres, Tipos_Unidad y Estado_Unidad.</td>
+            </tr>
+            <tr>
+              <td>Propiedad_Canal</td>
+              <td>Catálogo</td>
+              <td>Carga la clasificación de los canales comerciales.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Canales</td>
+              <td>Dimensión comercial</td>
+              <td>Carga canales de captación de leads.</td>
+              <td>Propiedad_Canal.</td>
+            </tr>
+            <tr>
+              <td>Clientes</td>
+              <td>Dimensión comercial</td>
+              <td>Carga los datos de clientes registrados.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Vendedores</td>
+              <td>Dimensión comercial</td>
+              <td>Carga los asesores comerciales responsables de la gestión del lead.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Lead_Venta</td>
+              <td>Tabla transaccional</td>
+              <td>Consolida cliente, unidad, vendedor, canal y condiciones comerciales del lead.</td>
+              <td>Unidades, Clientes, Vendedores y Canales.</td>
+            </tr>
+            <tr>
+              <td>Estado_Contrato</td>
+              <td>Catálogo</td>
+              <td>Carga los estados posibles del contrato, incluyendo vigencia.</td>
+              <td>Sin dependencia previa.</td>
+            </tr>
+            <tr>
+              <td>Contratos</td>
+              <td>Tabla transaccional</td>
+              <td>Registra contratos o ventas asociadas a los leads.</td>
+              <td>Lead_Venta y Estado_Contrato.</td>
+            </tr>
+            <tr>
+              <td>Notebook correo éxito</td>
+              <td>Control operativo</td>
+              <td>Notifica que la actualización finalizó correctamente.</td>
+              <td>Ruta de éxito del pipeline.</td>
+            </tr>
+            <tr>
+              <td>Notebook correo error</td>
+              <td>Control operativo</td>
+              <td>Notifica fallas de actualización y facilita la revisión del proceso.</td>
+              <td>Ruta de error del pipeline.</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section>
-      <h2>Pendientes de evidencia</h2>
-      <div class="callout warning"><strong>Para completar esta sección:</strong> agrega capturas del workspace de Fabric, pipeline, notebook o warehouse, además de una breve explicación de frecuencia de actualización.</div>
+      <h2>Validación del proceso ETL</h2>
+      <p>
+        La validación del pipeline se concentra en asegurar que las tablas sean cargadas en el orden correcto y que las dependencias entre llaves se mantengan consistentes. Por ello, el flujo prioriza la carga de catálogos y entidades base antes de procesar tablas dependientes como Unidades, Lead_Venta y Contratos.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Orden de carga</h3>
+          <p>Las tablas sin dependencias se procesan primero para evitar errores de integridad referencial.</p>
+        </div>
+        <div class="card">
+          <h3>Consistencia relacional</h3>
+          <p>El diseño respeta las relaciones del modelo SQL: proyecto, torre, unidad, lead y contrato.</p>
+        </div>
+        <div class="card">
+          <h3>Monitoreo</h3>
+          <p>El pipeline incorpora rutas de éxito y error mediante notebooks de notificación.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Aporte al modelo analítico</h2>
+      <p>
+        Esta capa deja la información preparada para la explotación analítica en Power BI. Al consolidar los datos de leads, clientes, canales, unidades, proyectos y contratos, se habilitan indicadores como leads generados, ventas realizadas, precio de venta, costo por lead, conversión por canal, desempeño por asesor y evolución comercial por periodo.
+      </p>
+      <div class="callout success">
+        <strong>Resultado:</strong> la capa ETL conecta la base operacional con la capa de warehouse y presentación, permitiendo que los dashboards se construyan sobre información ordenada, relacionada y lista para análisis.
+      </div>
+    </section>
+
+    <section>
+      <h2>Pendientes para reforzar la evidencia</h2>
+      <div class="callout warning">
+        <strong>Opcional:</strong> agregar una captura del historial de ejecución exitosa del pipeline y una captura del destino final en Fabric Warehouse para complementar la evidencia de carga.
+      </div>
     </section>
 
   </main>
+
   <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
 </body>
 </html>
