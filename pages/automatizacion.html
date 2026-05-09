@@ -3,45 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automatización · Inmobiliaria Mayo</title>
+  <title>Warehouse y Automatización · Inmobiliaria Mayo</title>
   <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 <body>
-  <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
-  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a href="data-layer.html">Data</a></li><li><a href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a class="active" href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
-  
+  <div class="topbar">
+    <div class="container">
+      <small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="caso-negocio.html">Caso</a></li>
+        <li><a href="arquitectura.html">Arquitectura</a></li>
+        <li><a href="data-layer.html">Data</a></li>
+        <li><a href="etl-fabric.html">Fabric</a></li>
+        <li><a href="powerapps.html">Aplicación</a></li>
+        <li><a href="powerbi.html">Power BI</a></li>
+        <li><a class="active" href="automatizacion.html">Automatización</a></li>
+        <li><a href="equipo.html">Equipo</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <main class="container">
 
     <section>
-      <h2>Power Automate y alertas</h2>
-      <p class="lead">La automatización permite que el dashboard no sea solo una vista pasiva, sino un sistema de alerta temprana para la gestión comercial.</p>
+      <span class="eyebrow">Capa 4 · Fabric Warehouse y automatización</span>
+      <h2>Consolidación del almacén de datos y validación del modelo analítico</h2>
+      <p class="lead">
+        Luego de ejecutar la capa ETL, las tablas son cargadas en <strong>Fabric Warehouse</strong>, donde se consolida el almacén de datos del proyecto. Esta capa permite validar la disponibilidad de la información, consultar las tablas cargadas y estructurar el modelo semántico que alimenta los reportes en Power BI.
+      </p>
       <div class="grid-3">
-        <div class="card"><h3>Alerta por bajo KPI</h3><p>Enviar correo si el ratio de conversión cae por debajo del umbral definido.</p></div>
-        <div class="card"><h3>Reporte periódico</h3><p>Enviar resumen semanal o mensual a gerencia comercial con principales variaciones.</p></div>
-        <div class="card"><h3>Seguimiento de leads</h3><p>Notificar leads sin gestión o con muchos días abiertos sin avance.</p></div>
+        <div class="card">
+          <h3>Warehouse</h3>
+          <p>Centraliza las tablas cargadas desde los dataflows y funciona como repositorio analítico para el proyecto.</p>
+        </div>
+        <div class="card">
+          <h3>Modelo semántico</h3>
+          <p>Permite establecer relaciones entre dimensiones y tablas transaccionales, facilitando el análisis posterior en Power BI.</p>
+        </div>
+        <div class="card">
+          <h3>Automatización</h3>
+          <p>Integra controles operativos mediante notebooks que notifican el resultado de la actualización del pipeline.</p>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Flujos sugeridos</h2>
-      <div class="table-wrap">
+      <h2>Vista general del Fabric Warehouse</h2>
+      <p>
+        El Warehouse implementado para el Grupo 5 contiene las principales tablas del modelo comercial, incluyendo clientes, canales, proyectos, torres, unidades, leads, contratos y tabla calendario. Esta evidencia confirma que los procesos ETL cargan exitosamente la información a un entorno analítico centralizado.
+      </p>
+      <div class="image-frame">
+        <img src="../assets/img/Warehouse_Grupo5.png" alt="Vista general del Fabric Warehouse del proyecto" />
+        <p class="caption">Fabric Warehouse del proyecto con las tablas cargadas y disponibles para consulta en el esquema dbo.</p>
+      </div>
+      <div class="table-wrap" style="margin-top: 18px;">
         <table>
-          <thead><tr><th>Flujo</th><th>Disparador</th><th>Acción</th><th>Usuario beneficiado</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Grupo de tablas</th>
+              <th>Tablas incluidas</th>
+              <th>Propósito analítico</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Alerta de conversión</td><td>Actualización del dataset o revisión programada</td><td>Correo a Jefatura Comercial si el KPI está en rojo.</td><td>Jefatura Comercial</td></tr>
-            <tr><td>Leads sin seguimiento</td><td>Lead con más de X días sin actualización</td><td>Notificación al vendedor responsable.</td><td>Equipo de ventas</td></tr>
-            <tr><td>Resumen ejecutivo</td><td>Cierre semanal o mensual</td><td>Envío de resumen con KPI, variación y principales hallazgos.</td><td>Gerencia Comercial</td></tr>
+            <tr>
+              <td>Dimensiones comerciales</td>
+              <td>Clientes, Vendedores, Canales, Propiedad_Canal</td>
+              <td>Caracterizar al cliente, el origen del lead y el responsable comercial.</td>
+            </tr>
+            <tr>
+              <td>Dimensiones inmobiliarias</td>
+              <td>Proyectos, Torres, Unidades, Tipos_Unidad, Estado_Torre, Estado_Unidad</td>
+              <td>Describir la oferta inmobiliaria y su estado comercial.</td>
+            </tr>
+            <tr>
+              <td>Tablas transaccionales</td>
+              <td>Lead_Venta, Contratos, Estado_Contrato</td>
+              <td>Analizar el embudo comercial y medir la conversión de leads a ventas.</td>
+            </tr>
+            <tr>
+              <td>Tabla de tiempo</td>
+              <td>G5 CALENDARIO</td>
+              <td>Habilitar análisis temporal por año, mes, trimestre y día.</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section>
-      <h2>Pendientes de evidencia</h2>
-      <div class="callout warning"><strong>Falta agregar:</strong> captura del flujo en Power Automate, correo de prueba y condición usada para disparar la alerta.</div>
+      <h2>Validación de la carga: tabla central Lead_Venta</h2>
+      <p>
+        Para validar que la información llegó correctamente al almacén de datos, se revisó la tabla <strong>G5 Lead_Venta</strong> dentro del Warehouse. Esta tabla constituye el núcleo transaccional del proyecto, ya que concentra cada oportunidad comercial registrada, junto con la unidad de interés, cliente asociado, asesor asignado, canal de origen y variables económicas del lead.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Campos clave validados</h3>
+          <p>
+            La tabla muestra campos como <strong>lead_id</strong>, <strong>unidad_id</strong>, <strong>cliente_id</strong>, <strong>vendedor_id</strong>, <strong>canal_id</strong>, <strong>fecha_inicio_lead</strong>, <strong>costo_lead</strong>, <strong>descuento_ofrecido</strong> y <strong>precio_venta_ofrecido</strong>.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Valor para el negocio</h3>
+          <p>
+            Esta estructura hace posible medir leads generados, seguimiento comercial, niveles de descuento, precios ofertados y el ratio de conversión comercial por canal, asesor, proyecto o periodo.
+          </p>
+        </div>
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Warehouse_Lead_Venta.png" alt="Vista previa de la tabla Lead_Venta en Fabric Warehouse" />
+        <p class="caption">Vista previa de la tabla G5 Lead_Venta dentro del Warehouse, utilizada para validar la carga de la tabla transaccional principal.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Modelo semántico y relaciones</h2>
+      <p>
+        A partir de las tablas disponibles en el Warehouse se construyó un modelo semántico que organiza las relaciones entre entidades inmobiliarias, dimensiones comerciales y tablas transaccionales. Esta capa permite analizar el comportamiento de los leads y contratos de forma consistente, evitando duplicidades y facilitando la navegación entre dimensiones.
+      </p>
+      <div class="image-frame">
+        <img src="../assets/img/Modelo_Semantico.png" alt="Modelo semántico del proyecto" />
+        <p class="caption">Modelo semántico utilizado para el análisis en Power BI, con relaciones entre proyectos, torres, unidades, clientes, canales, vendedores, leads y contratos.</p>
+      </div>
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="card">
+          <h3>Relaciones clave</h3>
+          <p>
+            El modelo conecta <strong>Proyectos → Torres → Unidades → Lead_Venta → Contratos</strong>, además de integrar dimensiones como clientes, vendedores, canales, propiedad del canal y estados del proceso.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Beneficio analítico</h3>
+          <p>
+            Esta estructura habilita análisis por proyecto, asesor, canal, unidad o periodo, y sirve como base para responder preguntas comerciales mediante dashboards y storytelling en Power BI.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Automatización e integración operativa</h2>
+      <p>
+        Como complemento a la carga del Warehouse, se integró una capa de automatización operativa basada en notebooks dentro de Fabric. Estos notebooks se ejecutan al final del pipeline para comunicar si la actualización de tablas fue exitosa o si ocurrió algún error durante la ejecución.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Notificación de éxito</h3>
+          <p>
+            Cuando todas las tablas terminan de actualizarse correctamente, el notebook envía un correo confirmando la ejecución exitosa del proceso. Esto ayuda a dar trazabilidad y confianza al flujo de actualización.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Notificación de error</h3>
+          <p>
+            Si alguna etapa del pipeline falla, se ejecuta un notebook alternativo que envía una alerta con el detalle del problema, permitiendo reaccionar oportunamente ante incidencias operativas.
+          </p>
+        </div>
+      </div>
+      <div class="callout success">
+        <strong>Integración lograda:</strong> la solución no solo carga datos al Warehouse, sino que también incorpora un mecanismo de monitoreo y notificación para asegurar la continuidad operativa del flujo analítico.
+      </div>
+      <div class="callout">
+        Para ver el detalle visual de los notebooks de notificación, se puede revisar también la página de <a href="etl-fabric.html">ETL y Fabric</a>, donde se documenta su implementación dentro del pipeline.
+      </div>
     </section>
 
   </main>
+
   <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
 </body>
 </html>
