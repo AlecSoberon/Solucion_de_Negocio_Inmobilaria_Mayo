@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETL y Fabric · Inmobiliaria Mayo</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
+  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a href="data-layer.html">Data</a></li><li><a class="active" href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
+  
+  <main class="container">
+
+    <section>
+      <h2>ETL y Microsoft Fabric</h2>
+      <p class="lead">Esta página está lista para documentar cómo los datos pasan desde las fuentes comerciales hacia el modelo analítico usado por Power BI.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Extracción</h3><p>Lectura de archivos, tablas SQL o fuentes operativas con datos de leads, ventas y costos.</p></div>
+        <div class="card"><h3>Transformación</h3><p>Limpieza de fechas, estandarización de estados, creación de llaves y cálculo de columnas auxiliares.</p></div>
+        <div class="card"><h3>Carga</h3><p>Publicación de tablas finales en warehouse/lakehouse o modelo semántico para consumo en Power BI.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pipeline sugerido</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Paso</th><th>Descripción</th><th>Validación</th></tr></thead>
+          <tbody>
+            <tr><td>01. Ingesta</td><td>Cargar datos crudos de leads, ventas, proyectos, canales y costos.</td><td>Conteo de filas vs fuente original.</td></tr>
+            <tr><td>02. Limpieza</td><td>Homologar fechas, estados de venta, nombres de canal y vendedores.</td><td>Valores nulos, duplicados y formatos.</td></tr>
+            <tr><td>03. Modelado</td><td>Separar dimensiones y hechos para análisis.</td><td>Integridad de llaves y relaciones.</td></tr>
+            <tr><td>04. Métricas</td><td>Preparar campos para cálculo de leads, ventas y conversión.</td><td>Comparación con resultados esperados.</td></tr>
+            <tr><td>05. Publicación</td><td>Actualizar dataset/modelo semántico conectado a Power BI.</td><td>Refresh exitoso y datos visibles en dashboard.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pendientes de evidencia</h2>
+      <div class="callout warning"><strong>Para completar esta sección:</strong> agrega capturas del workspace de Fabric, pipeline, notebook o warehouse, además de una breve explicación de frecuencia de actualización.</div>
+    </section>
+
+  </main>
+  <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
+</body>
+</html>

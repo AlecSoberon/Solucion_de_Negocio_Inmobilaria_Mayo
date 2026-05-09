@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arquitectura · Inmobiliaria Mayo</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
+  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a class="active" href="arquitectura.html">Arquitectura</a></li><li><a href="data-layer.html">Data</a></li><li><a href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
+  
+  <main class="container">
+
+    <section>
+      <h2>Arquitectura de solución propuesta</h2>
+      <p class="lead">La solución puede explicarse como una arquitectura de punta a punta: captura de datos comerciales, almacenamiento/modelado, transformación, consumo operativo y visualización ejecutiva.</p>
+      <div class="flow">
+        <div class="flow-step"><span>1</span><h3>Fuentes</h3><p>Leads, ventas, minutas, campañas, vendedores, proyectos y costos comerciales.</p></div>
+        <div class="flow-step"><span>2</span><h3>Data layer</h3><p>Tablas normalizadas en SQL o Fabric Warehouse para consolidar la información.</p></div>
+        <div class="flow-step"><span>3</span><h3>ETL / Fabric</h3><p>Procesos de limpieza, validación, cálculo de métricas y actualización.</p></div>
+        <div class="flow-step"><span>4</span><h3>Aplicación</h3><p>Power Apps para registrar, actualizar y consultar leads comerciales.</p></div>
+        <div class="flow-step"><span>5</span><h3>Analytics</h3><p>Power BI y alertas para seguimiento del KPI y toma de decisiones.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Capas de la arquitectura</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Capa</th><th>Componente</th><th>Rol en la solución</th><th>Evidencia sugerida</th></tr></thead>
+          <tbody>
+            <tr><td>Origen</td><td>Data comercial</td><td>Contiene leads, ventas, canales, vendedores, proyectos, unidades y costos.</td><td>Diccionario de datos o captura de tabla base.</td></tr>
+            <tr><td>Almacenamiento</td><td>SQL / Fabric Warehouse</td><td>Centraliza tablas y evita depender de archivos sueltos.</td><td>Modelo relacional o consulta SQL.</td></tr>
+            <tr><td>Transformación</td><td>Fabric Data Pipeline / Notebook</td><td>Limpia datos, genera llaves, calcula métricas y prepara datos para BI.</td><td>Captura del pipeline o notebook.</td></tr>
+            <tr><td>Operación</td><td>Power Apps</td><td>Permite capturar o actualizar información comercial desde una interfaz amigable.</td><td>Pantallas de app: inicio, registro, edición, consulta.</td></tr>
+            <tr><td>Automatización</td><td>Power Automate</td><td>Envía alertas o correos cuando el KPI cae o se requieren acciones.</td><td>Flujo automatizado y correo de prueba.</td></tr>
+            <tr><td>Visualización</td><td>Power BI</td><td>Presenta indicadores, tendencias y análisis accionables.</td><td>Dashboard publicado y capturas finales.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Qué falta para cerrar esta página</h2>
+      <div class="callout warning">Falta agregar una imagen real de la arquitectura final. Puede ser un diagrama hecho en PowerPoint, Canva, Draw.io o Miro. Esta página ya deja la narrativa lista; solo falta reemplazarla por el diagrama oficial del grupo.</div>
+    </section>
+
+  </main>
+  <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
+</body>
+</html>

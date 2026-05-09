@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data layer · Inmobiliaria Mayo</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
+  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a class="active" href="data-layer.html">Data</a></li><li><a href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
+  
+  <main class="container">
+
+    <section>
+      <h2>Data layer y modelo de datos</h2>
+      <p class="lead">Esta sección documenta la estructura mínima de datos necesaria para calcular el ratio de conversión comercial y responder las preguntas de negocio del dashboard.</p>
+      <div class="grid-2">
+        <div class="image-frame"><img src="../assets/img/Imagen_Indicadores.png" alt="Indicador de conversión" /><p class="caption">Definición del indicador principal incluida en el dashboard.</p></div>
+        <div>
+          <h3>Regla principal</h3>
+          <p>El modelo debe permitir relacionar leads con ventas vigentes, segmentando por tiempo, proyecto, canal, vendedor, torre, piso y tipología.</p>
+          <p><span class="pill">Lead</span><span class="pill">Venta</span><span class="pill">Proyecto</span><span class="pill">Canal</span><span class="pill">Vendedor</span><span class="pill">Unidad</span><span class="pill">Calendario</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tablas sugeridas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tabla</th><th>Campos clave</th><th>Uso analítico</th></tr></thead>
+          <tbody>
+            <tr><td>dim_calendario</td><td>fecha, año, mes, semana, trimestre</td><td>Permite análisis mensual, comparativos y tendencias.</td></tr>
+            <tr><td>dim_proyecto</td><td>id_proyecto, proyecto, inmobiliaria, fase, distrito</td><td>Segmenta el desempeño por proyecto y ubicación.</td></tr>
+            <tr><td>dim_canal</td><td>id_canal, canal, tipo_canal</td><td>Evalúa efectividad de captación comercial.</td></tr>
+            <tr><td>dim_vendedor</td><td>id_vendedor, vendedor, equipo</td><td>Compara performance comercial por responsable.</td></tr>
+            <tr><td>dim_unidad</td><td>id_unidad, torre, piso, tipología, dormitorios</td><td>Permite analizar qué producto convierte mejor.</td></tr>
+            <tr><td>fact_leads</td><td>id_lead, fecha_lead, id_canal, id_proyecto</td><td>Base para contar leads brutos.</td></tr>
+            <tr><td>fact_ventas</td><td>id_venta, id_lead, fecha_venta, estado_minuta</td><td>Base para contar minutas firmadas vigentes.</td></tr>
+            <tr><td>fact_costos</td><td>fecha, id_canal, costo_leads</td><td>Permite relacionar inversión con conversión.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Medidas principales</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Leads brutos</h3><p>Conteo de leads registrados en el periodo seleccionado.</p></div>
+        <div class="card"><h3>Minutas vigentes</h3><p>Conteo de ventas con minuta firmada vigente, excluyendo anuladas o rescindidas.</p></div>
+        <div class="card"><h3>Ratio conversión</h3><p>Minutas vigentes / Leads brutos × 100.</p></div>
+      </div>
+      <div class="callout warning"><strong>Falta evidencia:</strong> captura del modelo relacional, diagrama entidad-relación o screenshot del modelo semántico de Power BI/Fabric.</div>
+    </section>
+
+  </main>
+  <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
+</body>
+</html>
