@@ -28,7 +28,12 @@
       { unidad_id: 102, torre_id: 1, tipo_unidad_id: 3, piso: 8, numero_unidad: "A-804", metraje_m2: 93, precio_lista: 560000, estado_unidad_id: 1 },
       { unidad_id: 103, torre_id: 2, tipo_unidad_id: 2, piso: 11, numero_unidad: "B-1103", metraje_m2: 75, precio_lista: 470000, estado_unidad_id: 1 },
       { unidad_id: 104, torre_id: 3, tipo_unidad_id: 1, piso: 4, numero_unidad: "N-404", metraje_m2: 48, precio_lista: 290000, estado_unidad_id: 1 },
-      { unidad_id: 105, torre_id: 3, tipo_unidad_id: 2, piso: 10, numero_unidad: "N-1002", metraje_m2: 70, precio_lista: 410000, estado_unidad_id: 2 }
+      { unidad_id: 105, torre_id: 3, tipo_unidad_id: 2, piso: 10, numero_unidad: "N-1002", metraje_m2: 70, precio_lista: 410000, estado_unidad_id: 2 },
+      { unidad_id: 106, torre_id: 1, tipo_unidad_id: 1, piso: 3, numero_unidad: "A-303", metraje_m2: 42, precio_lista: 198000, estado_unidad_id: 1 },
+      { unidad_id: 107, torre_id: 1, tipo_unidad_id: 1, piso: 5, numero_unidad: "A-505", metraje_m2: 45, precio_lista: 210000, estado_unidad_id: 1 },
+      { unidad_id: 108, torre_id: 2, tipo_unidad_id: 3, piso: 9, numero_unidad: "B-904", metraje_m2: 88, precio_lista: 520000, estado_unidad_id: 1 },
+      { unidad_id: 109, torre_id: 3, tipo_unidad_id: 1, piso: 7, numero_unidad: "N-705", metraje_m2: 46, precio_lista: 270000, estado_unidad_id: 1 },
+      { unidad_id: 110, torre_id: 3, tipo_unidad_id: 2, piso: 12, numero_unidad: "N-1201", metraje_m2: 68, precio_lista: 395000, estado_unidad_id: 1 }
     ],
     estadoUnidad: [
       { estado_unidad_id: 1, estado_unidad: "Disponible" },
@@ -134,7 +139,10 @@
     $("kpiAsignados").textContent = state.leads.filter((l) => !!l.vendedor_id).length;
   }
 
-  function getFilteredUnits() {
+  function getFilteredUnits(options = {}) {
+    const ignoreBudget = options.ignoreBudget || false;
+    const ignoreRooms = options.ignoreRooms || false;
+    const ignoreType = options.ignoreType || false;
     const proyectoId = Number($("filtroProyecto").value || 0);
     const torreId = Number($("filtroTorre").value || 0);
     const tipoUnidadId = Number($("filtroTipoUnidad").value || 0);
@@ -145,26 +153,58 @@
       if (unidad.estado_unidad_id !== 1) return false;
       const torre = state.torres.find((t) => t.torre_id === unidad.torre_id);
       const tipo = state.tiposUnidad.find((t) => t.tipo_unidad_id === unidad.tipo_unidad_id);
+      if (!torre || !tipo) return false;
       if (proyectoId && torre.proyecto_id !== proyectoId) return false;
       if (torreId && unidad.torre_id !== torreId) return false;
-      if (tipoUnidadId && unidad.tipo_unidad_id !== tipoUnidadId) return false;
-      if (habitaciones && tipo.habitaciones !== habitaciones) return false;
-      if (presupuesto && unidad.precio_lista > presupuesto) return false;
+      if (!ignoreType && tipoUnidadId && unidad.tipo_unidad_id !== tipoUnidadId) return false;
+      if (!ignoreRooms && habitaciones && tipo.habitaciones !== habitaciones) return false;
+      if (!ignoreBudget && presupuesto && unidad.precio_lista > presupuesto) return false;
       return true;
     });
   }
 
+  function getAvailableUnitsWithFallback() {
+    let units = getFilteredUnits();
+    if (units.length) return { units, fallback: "" };
+
+    units = getFilteredUnits({ ignoreBudget: true });
+    if (units.length) return { units, fallback: "No hubo unidades dentro del presupuesto. Se muestran unidades disponibles que coinciden con proyecto, torre y tipo." };
+
+    units = getFilteredUnits({ ignoreBudget: true, ignoreRooms: true });
+    if (units.length) return { units, fallback: "No hubo coincidencias exactas de habitaciones. Se muestran unidades disponibles según proyecto, torre y tipo." };
+
+    units = getFilteredUnits({ ignoreBudget: true, ignoreRooms: true, ignoreType: true });
+    if (units.length) return { units, fallback: "No hubo coincidencias exactas. Se muestran unidades disponibles para el proyecto o torre seleccionada." };
+
+    units = state.unidades.filter((unidad) => unidad.estado_unidad_id === 1);
+    return { units, fallback: "No hubo coincidencias con los filtros. Se muestran todas las unidades disponibles." };
+  }
+
+  function updateTorreOptions() {
+    const proyectoId = Number($("filtroProyecto")?.value || 0);
+    const torres = proyectoId ? state.torres.filter((torre) => torre.proyecto_id === proyectoId) : state.torres;
+    const current = $("filtroTorre")?.value;
+    renderSelect("filtroTorre", torres, "torre_id", "nombre_torre", "Todas");
+    if (torres.some((torre) => String(torre.torre_id) === String(current))) {
+      $("filtroTorre").value = current;
+    }
+  }
+
   function renderFilteredUnits() {
-    const filtered = getFilteredUnits().map((unidad) => {
+    const result = getAvailableUnitsWithFallback();
+    const filtered = result.units.map((unidad) => {
       const detail = getUnidadDetalle(unidad.unidad_id);
       return {
         unidad_id: unidad.unidad_id,
-        label: `${detail.proyecto.nombre_proyecto} | ${detail.torre.nombre_torre} | ${unidad.numero_unidad} | S/ ${money(unidad.precio_lista)}`
+        label: `${detail.proyecto.nombre_proyecto} | ${detail.torre.nombre_torre} | ${unidad.numero_unidad} | ${detail.tipo.descripcion} | S/ ${money(unidad.precio_lista)}`
       };
     });
     renderSelect("unidadDisponible", filtered, "unidad_id", "label", "Seleccione unidad");
     $("precioLista").value = "";
     $("precioOfertado").value = "";
+    if ($("unidadResultado")) {
+      $("unidadResultado").textContent = result.fallback;
+    }
   }
 
   function updateUnidadPricing() {
@@ -306,6 +346,15 @@
     });
 
     $("btnFiltrarUnidades").addEventListener("click", renderFilteredUnits);
+    ["filtroProyecto", "filtroTorre", "filtroTipoUnidad", "filtroHabitaciones", "filtroPresupuesto"].forEach((id) => {
+      const el = $(id);
+      if (!el) return;
+      el.addEventListener("change", () => {
+        if (id === "filtroProyecto") updateTorreOptions();
+        renderFilteredUnits();
+      });
+      if (id === "filtroPresupuesto") el.addEventListener("input", renderFilteredUnits);
+    });
     $("unidadDisponible").addEventListener("change", updateUnidadPricing);
     document.querySelector("#formUnidad [name='descuento']").addEventListener("input", updateUnidadPricing);
 
@@ -424,6 +473,7 @@
   function init() {
     if (!$("formCliente")) return;
     renderBaseCatalogs();
+    updateTorreOptions();
     renderLeadsSelects();
     renderFilteredUnits();
     refreshAsignacionContext();

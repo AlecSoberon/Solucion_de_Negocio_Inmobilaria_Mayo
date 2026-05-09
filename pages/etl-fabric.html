@@ -66,20 +66,6 @@
     </section>
 
     <section>
-      <h2>Ejecución final validada</h2>
-      <p>
-        Como evidencia de cierre, se incorporó la captura final del pipeline donde los dataflows principales aparecen con estado <strong>Correcto</strong>. Esta validación confirma que las entidades requeridas fueron procesadas y cargadas exitosamente, incluyendo Lead_Venta, Unidades, Canales, Torres, Contratos, Proyectos, Clientes, Vendedores, Propiedad_Canal, Estado_Unidad y Estado_Contrato.
-      </p>
-      <div class="image-frame pipeline-final-img">
-        <img src="../assets/img/Pipeline_Ejecucion_Aprobada.png" alt="Ejecución final aprobada del pipeline en Microsoft Fabric" />
-        <p class="caption">Ejecución final validada del pipeline: los dataflows principales registran estado Correcto y evidencian la carga exitosa del proceso ETL.</p>
-      </div>
-      <div class="callout success">
-        <strong>Resultado de validación:</strong> el proceso ETL quedó sustentado con una evidencia final de ejecución correcta, reforzando la trazabilidad entre Azure SQL, Fabric Data Factory, Warehouse y Power BI.
-      </div>
-    </section>
-
-    <section>
       <h2>Dataflows implementados</h2>
       <p>
         Cada dataflow cumple la función de extraer una tabla específica desde la base relacional, navegar hacia el objeto correspondiente y configurar su destino en Fabric Warehouse. Para documentar la lógica del proceso, se muestran dos ejemplos: un catálogo simple y la tabla transaccional principal del modelo.
@@ -311,9 +297,9 @@
     </section>
 
     <section>
-      <h2>Cierre de evidencia ETL</h2>
-      <div class="callout success">
-        <strong>Estado final:</strong> la sección ya cuenta con vista general del pipeline, ejemplos de dataflows, notebooks de notificación y evidencia de ejecución validada.
+      <h2>Pendientes para reforzar la evidencia</h2>
+      <div class="callout warning">
+        <strong>Opcional:</strong> agregar una captura del historial de ejecución exitosa del pipeline y una captura del destino final en Fabric Warehouse para complementar la evidencia de carga.
       </div>
     </section>
 

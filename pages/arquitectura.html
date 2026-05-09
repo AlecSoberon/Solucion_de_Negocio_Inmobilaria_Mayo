@@ -13,37 +13,33 @@
   <main class="container">
 
     <section>
+      <span class="eyebrow">Arquitectura cloud</span>
       <h2>Arquitectura de solución propuesta</h2>
-      <p class="lead">La solución puede explicarse como una arquitectura de punta a punta: captura de datos comerciales, almacenamiento/modelado, transformación, consumo operativo y visualización ejecutiva.</p>
-      <div class="flow">
-        <div class="flow-step"><span>1</span><h3>Fuentes</h3><p>Leads, ventas, minutas, campañas, vendedores, proyectos y costos comerciales.</p></div>
-        <div class="flow-step"><span>2</span><h3>Data layer</h3><p>Tablas normalizadas en SQL o Fabric Warehouse para consolidar la información.</p></div>
-        <div class="flow-step"><span>3</span><h3>ETL / Fabric</h3><p>Procesos de limpieza, validación, cálculo de métricas y actualización.</p></div>
-        <div class="flow-step"><span>4</span><h3>Aplicación</h3><p>Aplicación web para registrar, actualizar y consultar leads comerciales.</p></div>
-        <div class="flow-step"><span>5</span><h3>Analytics</h3><p>Power BI y alertas para seguimiento del KPI y toma de decisiones.</p></div>
+      <p class="lead">
+        La arquitectura resume el flujo completo de la solución: captura de datos comerciales, almacenamiento, transformación, automatización, modelo analítico y visualización ejecutiva para la toma de decisiones.
+      </p>
+      <div class="image-frame architecture-frame">
+        <img src="../assets/img/Arquitectura_Proyecto.svg" alt="Arquitectura completa de la solución cloud para Inmobiliaria Mayo" />
+        <p class="caption">Arquitectura general del proyecto: integración entre aplicación comercial, base de datos, Fabric, Warehouse, automatizaciones y Power BI.</p>
       </div>
     </section>
 
     <section>
-      <h2>Capas de la arquitectura</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Capa</th><th>Componente</th><th>Rol en la solución</th><th>Evidencia sugerida</th></tr></thead>
-          <tbody>
-            <tr><td>Origen</td><td>Data comercial</td><td>Contiene leads, ventas, canales, vendedores, proyectos, unidades y costos.</td><td>Diccionario de datos o captura de tabla base.</td></tr>
-            <tr><td>Almacenamiento</td><td>SQL / Fabric Warehouse</td><td>Centraliza tablas y evita depender de archivos sueltos.</td><td>Modelo relacional o consulta SQL.</td></tr>
-            <tr><td>Transformación</td><td>Fabric Data Pipeline / Notebook</td><td>Limpia datos, genera llaves, calcula métricas y prepara datos para BI.</td><td>Captura del pipeline o notebook.</td></tr>
-            <tr><td>Operación</td><td>Aplicación</td><td>Permite capturar o actualizar información comercial desde una interfaz amigable.</td><td>Pantallas de app: inicio, registro, edición, consulta.</td></tr>
-            <tr><td>Automatización</td><td>Power Automate</td><td>Envía alertas o correos cuando el KPI cae o se requieren acciones.</td><td>Flujo automatizado y correo de prueba.</td></tr>
-            <tr><td>Visualización</td><td>Power BI</td><td>Presenta indicadores, tendencias y análisis accionables.</td><td>Dashboard publicado y capturas finales.</td></tr>
-          </tbody>
-        </table>
+      <h2>Lectura ejecutiva de la arquitectura</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Entrada y operación</h3>
+          <p>La capa de aplicación permite registrar clientes, unidades de interés y asignación comercial para alimentar el proceso de venta.</p>
+        </div>
+        <div class="card">
+          <h3>Procesamiento y almacén</h3>
+          <p>Azure SQL, Dataflows y Fabric Warehouse consolidan la información y preparan las tablas para análisis.</p>
+        </div>
+        <div class="card">
+          <h3>Consumo analítico</h3>
+          <p>El modelo semántico y Power BI habilitan dashboards de conversión, funnel, portafolio y rendimiento comercial.</p>
+        </div>
       </div>
-    </section>
-
-    <section>
-      <h2>Lectura de la arquitectura</h2>
-      <div class="callout">La arquitectura resume el recorrido de datos desde el registro comercial hasta el consumo analítico: aplicación web, Azure SQL, Fabric Data Factory, Fabric Warehouse, modelo semántico, automatizaciones y Power BI.</div>
     </section>
 
   </main>
