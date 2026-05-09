@@ -4,7 +4,7 @@ Portafolio web del proyecto de análisis del ratio de conversión comercial para
 
 ## Objetivo
 
-Documentar la solución analítica del proyecto de Inmobiliaria Mayo, incluyendo el caso de negocio, modelo de datos, tres aplicaciones propuestas para el flujo comercial, arquitectura cloud, procesos ETL, Warehouse, modelo semántico, dashboard en Power BI y automatizaciones de notificación.
+Documentar la solución analítica del proyecto Villa Verde, incluyendo el caso de negocio, modelo de datos, aplicación web, arquitectura cloud, procesos ETL, Warehouse, modelo semántico, dashboard en Power BI y automatizaciones de notificación.
 
 ## Estructura
 
@@ -25,10 +25,6 @@ assets/
   img/
 ```
 
-## Capa de aplicación
-
-La sección de aplicación documenta tres módulos derivados del flujograma operativo: registro del cliente, selección de departamento y asignación comercial. También incluye una propuesta de agentes para calificación de leads, recomendación de unidades, asignación de asesores, seguimiento, negociación y cierre.
-
 ## Publicación
 
 El sitio se publica con GitHub Pages desde la rama `main`.
@@ -36,5 +32,5 @@ El sitio se publica con GitHub Pages desde la rama `main`.
 ## Pendientes recomendados
 
 - Validar que el enlace embebido de Power BI/Fabric siga activo.
-- Validar la conexión productiva de las tres aplicaciones propuestas con Azure SQL o Fabric cuando el equipo entregue la versión final.
+- Reemplazar el prototipo de aplicación por capturas finales si el equipo entrega la versión conectada a base de datos.
 - Evitar publicar credenciales, tokens o app passwords en notebooks o capturas.
