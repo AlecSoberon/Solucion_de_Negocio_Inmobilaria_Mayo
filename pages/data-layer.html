@@ -8,50 +8,110 @@
 </head>
 <body>
   <div class="topbar"><div class="container"><small>PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ · BUSINESS ANALYTICS 2026-ENERO</small></div></div>
-  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a class="active" href="data-layer.html">Data</a></li><li><a href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Power Apps</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
-  
+  <nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">Grupo 05 · Inmobiliaria Mayo</a><ul><li><a href="../index.html">Inicio</a></li><li><a href="caso-negocio.html">Caso</a></li><li><a href="arquitectura.html">Arquitectura</a></li><li><a class="active" href="data-layer.html">Data</a></li><li><a href="etl-fabric.html">Fabric</a></li><li><a href="powerapps.html">Aplicación</a></li><li><a href="powerbi.html">Power BI</a></li><li><a href="automatizacion.html">Automatización</a></li><li><a href="equipo.html">Equipo</a></li></ul></div></nav>
+
   <main class="container">
 
     <section>
-      <h2>Data layer y modelo de datos</h2>
-      <p class="lead">Esta sección documenta la estructura mínima de datos necesaria para calcular el ratio de conversión comercial y responder las preguntas de negocio del dashboard.</p>
-      <div class="grid-2">
-        <div class="image-frame"><img src="../assets/img/Imagen_Indicadores.png" alt="Indicador de conversión" /><p class="caption">Definición del indicador principal incluida en el dashboard.</p></div>
-        <div>
-          <h3>Regla principal</h3>
-          <p>El modelo debe permitir relacionar leads con ventas vigentes, segmentando por tiempo, proyecto, canal, vendedor, torre, piso y tipología.</p>
-          <p><span class="pill">Lead</span><span class="pill">Venta</span><span class="pill">Proyecto</span><span class="pill">Canal</span><span class="pill">Vendedor</span><span class="pill">Unidad</span><span class="pill">Calendario</span></p>
-        </div>
+      <span class="eyebrow">Capa 1 · Data Layer</span>
+      <h2>Capa de datos y modelo relacional</h2>
+      <p class="lead">La capa de datos estructura la información comercial de Inmobiliaria Mayo para registrar clientes, leads, unidades de interés, asesores, canales de captación y contratos. Esta base relacional permite dar trazabilidad al proceso comercial desde el primer contacto hasta la conversión en venta.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Objetivo</h3><p>Centralizar la información transaccional del funnel comercial inmobiliario en una base SQL ordenada y conectable con la solución cloud.</p></div>
+        <div class="card"><h3>Tabla central</h3><p><strong>G5.Lead_Venta</strong> conecta cliente, unidad, vendedor, canal y condiciones comerciales de la oportunidad.</p></div>
+        <div class="card"><h3>Uso analítico</h3><p>Permite calcular leads generados, ventas concretadas, precio ofertado, descuento, costo del lead y ratio de conversión comercial.</p></div>
       </div>
     </section>
 
     <section>
-      <h2>Tablas sugeridas</h2>
+      <h2>Flujo lógico del modelo</h2>
+      <p class="lead">El modelo representa el recorrido comercial de una oportunidad inmobiliaria: primero se define la oferta disponible, luego se registra el interés del cliente y finalmente se valida si el lead llega a contrato.</p>
+      <div class="flow">
+        <div class="flow-step"><span>1</span><h4>Proyectos</h4><p>Registro de proyectos inmobiliarios, ubicación, fechas y estado.</p></div>
+        <div class="flow-step"><span>2</span><h4>Torres</h4><p>Detalle de torres asociadas a cada proyecto.</p></div>
+        <div class="flow-step"><span>3</span><h4>Unidades</h4><p>Inventario de departamentos o unidades disponibles, precio, piso y metraje.</p></div>
+        <div class="flow-step"><span>4</span><h4>Lead_Venta</h4><p>Registro de oportunidad comercial, cliente, asesor, canal y unidad de interés.</p></div>
+        <div class="flow-step"><span>5</span><h4>Contratos</h4><p>Formalización de venta y estado del contrato.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Modelo entidad-relación</h2>
+      <p class="lead">El siguiente diagrama muestra las tablas implementadas, sus campos principales y las relaciones utilizadas para sostener la solución analítica.</p>
+      <div class="image-frame">
+        <img src="../assets/img/Modelo_Relacional.png" alt="Modelo relacional del proyecto Inmobiliaria Mayo" />
+        <p class="caption">Modelo relacional de la solución: proyectos, torres, unidades, leads, clientes, vendedores, canales y contratos.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tablas del modelo</h2>
+      <p class="lead">La base de datos fue organizada bajo el esquema <strong>G5</strong>. El diseño combina tablas maestras, catálogos y tablas transaccionales para representar el proceso comercial de forma ordenada.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Tabla</th><th>Campos clave</th><th>Uso analítico</th></tr></thead>
+          <thead>
+            <tr><th>Tabla</th><th>Tipo</th><th>Descripción</th><th>Clave / relación principal</th></tr>
+          </thead>
           <tbody>
-            <tr><td>dim_calendario</td><td>fecha, año, mes, semana, trimestre</td><td>Permite análisis mensual, comparativos y tendencias.</td></tr>
-            <tr><td>dim_proyecto</td><td>id_proyecto, proyecto, inmobiliaria, fase, distrito</td><td>Segmenta el desempeño por proyecto y ubicación.</td></tr>
-            <tr><td>dim_canal</td><td>id_canal, canal, tipo_canal</td><td>Evalúa efectividad de captación comercial.</td></tr>
-            <tr><td>dim_vendedor</td><td>id_vendedor, vendedor, equipo</td><td>Compara performance comercial por responsable.</td></tr>
-            <tr><td>dim_unidad</td><td>id_unidad, torre, piso, tipología, dormitorios</td><td>Permite analizar qué producto convierte mejor.</td></tr>
-            <tr><td>fact_leads</td><td>id_lead, fecha_lead, id_canal, id_proyecto</td><td>Base para contar leads brutos.</td></tr>
-            <tr><td>fact_ventas</td><td>id_venta, id_lead, fecha_venta, estado_minuta</td><td>Base para contar minutas firmadas vigentes.</td></tr>
-            <tr><td>fact_costos</td><td>fecha, id_canal, costo_leads</td><td>Permite relacionar inversión con conversión.</td></tr>
+            <tr><td><strong>G5.Proyectos</strong></td><td>Maestra</td><td>Almacena los proyectos inmobiliarios, distrito, dirección, fechas y estado del proyecto.</td><td><code>proyecto_id</code> → Torres</td></tr>
+            <tr><td><strong>G5.Estado_Torre</strong></td><td>Catálogo</td><td>Define los estados posibles de una torre.</td><td><code>estado_torre_id</code> → Torres</td></tr>
+            <tr><td><strong>G5.Torres</strong></td><td>Maestra</td><td>Registra las torres asociadas a cada proyecto, número de pisos, unidades y estado.</td><td><code>torre_id</code> → Unidades</td></tr>
+            <tr><td><strong>G5.Estado_Unidad</strong></td><td>Catálogo</td><td>Define el estado comercial de cada unidad inmobiliaria.</td><td><code>estado_unidad_id</code> → Unidades</td></tr>
+            <tr><td><strong>G5.Tipos_Unidad</strong></td><td>Catálogo</td><td>Clasifica las unidades según descripción, número de habitaciones y baños.</td><td><code>tipo_unidad_id</code> → Unidades</td></tr>
+            <tr><td><strong>G5.Unidades</strong></td><td>Maestra</td><td>Contiene el inventario de unidades, incluyendo torre, piso, número, metraje, precio de lista y estado.</td><td><code>unidad_id</code> → Lead_Venta</td></tr>
+            <tr><td><strong>G5.Clientes</strong></td><td>Maestra</td><td>Registra los datos del cliente potencial o comprador: documento, nombres, teléfono, correo y fecha de registro.</td><td><code>cliente_id</code> → Lead_Venta</td></tr>
+            <tr><td><strong>G5.Vendedores</strong></td><td>Maestra</td><td>Almacena la información de los asesores comerciales responsables de gestionar leads.</td><td><code>vendedor_id</code> → Lead_Venta</td></tr>
+            <tr><td><strong>G5.Propiedad_Canal</strong></td><td>Catálogo</td><td>Agrupa los canales según su propiedad o naturaleza comercial.</td><td><code>propiedad_canal_id</code> → Canales</td></tr>
+            <tr><td><strong>G5.Canales</strong></td><td>Maestra</td><td>Registra los canales de captación de leads y su detalle.</td><td><code>canal_id</code> → Lead_Venta</td></tr>
+            <tr><td><strong>G5.Lead_Venta</strong></td><td>Transaccional</td><td>Tabla central del modelo. Relaciona cliente, unidad de interés, asesor, canal, costo del lead, fecha, descuento y precio ofertado.</td><td><code>lead_id</code> → Contratos</td></tr>
+            <tr><td><strong>G5.Estado_Contrato</strong></td><td>Catálogo</td><td>Define el estado del contrato y permite identificar si se encuentra vigente.</td><td><code>estado_contrato_id</code> → Contratos</td></tr>
+            <tr><td><strong>G5.Contratos</strong></td><td>Transaccional</td><td>Registra la conversión final del lead, fecha de venta, descuento final y precio de venta final.</td><td><code>contrato_id</code>, <code>lead_id</code></td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section>
-      <h2>Medidas principales</h2>
-      <div class="grid-3">
-        <div class="card"><h3>Leads brutos</h3><p>Conteo de leads registrados en el periodo seleccionado.</p></div>
-        <div class="card"><h3>Minutas vigentes</h3><p>Conteo de ventas con minuta firmada vigente, excluyendo anuladas o rescindidas.</p></div>
-        <div class="card"><h3>Ratio conversión</h3><p>Minutas vigentes / Leads brutos × 100.</p></div>
+      <h2>Relaciones principales</h2>
+      <div class="grid-2">
+        <div>
+          <h3>Relaciones de oferta inmobiliaria</h3>
+          <p><span class="pill">Proyectos 1:N Torres</span><span class="pill">Torres 1:N Unidades</span><span class="pill">Tipos_Unidad 1:N Unidades</span><span class="pill">Estado_Unidad 1:N Unidades</span></p>
+          <p>Estas relaciones permiten analizar la oferta inmobiliaria por proyecto, torre, piso, tipología, metraje, precio de lista y estado de la unidad.</p>
+        </div>
+        <div>
+          <h3>Relaciones comerciales</h3>
+          <p><span class="pill">Clientes 1:N Leads</span><span class="pill">Vendedores 1:N Leads</span><span class="pill">Canales 1:N Leads</span><span class="pill">Leads 1:N Contratos</span></p>
+          <p>Estas relaciones permiten seguir la trazabilidad de cada oportunidad comercial, desde el canal de origen hasta la venta o contrato final.</p>
+        </div>
       </div>
-      <div class="callout warning"><strong>Falta evidencia:</strong> captura del modelo relacional, diagrama entidad-relación o screenshot del modelo semántico de Power BI/Fabric.</div>
+    </section>
+
+    <section>
+      <h2>Indicadores que habilita la capa de datos</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Leads generados</h3><p>Conteo de registros en <strong>Lead_Venta</strong>, segmentado por fecha, canal, proyecto, asesor o unidad.</p></div>
+        <div class="card"><h3>Ventas concretadas</h3><p>Conteo de contratos registrados, considerando el estado contractual y la vigencia de la venta.</p></div>
+        <div class="card"><h3>Ratio de conversión</h3><p>Relación entre ventas concretadas y leads generados, expresada como porcentaje.</p></div>
+      </div>
+      <div class="callout success"><strong>Conexión con la solución:</strong> esta capa sirve como fuente de datos para la aplicación de registro, los procesos ETL en Fabric, el warehouse y los reportes de Power BI.</div>
+    </section>
+
+    <section>
+      <h2>Evidencia técnica</h2>
+      <p>El script SQL define la base <strong>BaseDatosPucpG5</strong>, el esquema <strong>G5</strong>, las tablas del modelo, sus llaves primarias y las llaves foráneas necesarias para mantener la integridad referencial.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Elemento</th><th>Implementación</th></tr></thead>
+          <tbody>
+            <tr><td>Base de datos</td><td><code>BaseDatosPucpG5</code></td></tr>
+            <tr><td>Esquema</td><td><code>G5</code></td></tr>
+            <tr><td>Tablas creadas</td><td>13 tablas: maestras, catálogos y transaccionales.</td></tr>
+            <tr><td>Integridad</td><td>Llaves primarias y foráneas para conectar proyectos, torres, unidades, leads, clientes, vendedores, canales y contratos.</td></tr>
+            <tr><td>Uso posterior</td><td>Alimentación de ETL, warehouse y modelo de presentación en Power BI.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
   </main>
