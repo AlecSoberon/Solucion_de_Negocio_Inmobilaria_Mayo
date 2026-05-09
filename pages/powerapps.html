@@ -31,277 +31,278 @@
   </nav>
 
   <main class="container">
+
     <section>
       <span class="eyebrow">Capa 2 · Aplicación comercial</span>
-      <h2>Aplicaciones operativas y agentes para el flujo comercial</h2>
+      <h2>Prototipo web para registro y gestión de leads</h2>
       <p class="lead">
-        Esta sección documenta la capa de aplicación del proyecto con base en el flujo real de venta inmobiliaria. Se presenta el proceso funcional, tres aplicaciones que acompañan el registro y gestión del lead, y un conjunto de agentes mockup diseñados para apoyar la calificación, recomendación y asignación comercial.
+        Para representar la capa de aplicación del proyecto, se documenta un prototipo web desarrollado con apoyo de Cursor. Su objetivo es cubrir el flujo operativo de registro comercial: datos del cliente, unidad inmobiliaria de interés, canal de origen y asesor responsable.
       </p>
-      <div class="kpi-strip kpi-centered">
-        <div class="mini-card"><strong class="big" id="kpiClientes">0</strong><p class="muted">clientes simulados</p></div>
-        <div class="mini-card"><strong class="big" id="kpiLeads">0</strong><p class="muted">leads activos</p></div>
-        <div class="mini-card"><strong class="big" id="kpiUnidades">0</strong><p class="muted">unidades disponibles</p></div>
-        <div class="mini-card"><strong class="big" id="kpiAsignados">0</strong><p class="muted">leads asignados</p></div>
-        <div class="mini-card"><strong class="big">Demo</strong><p class="muted">prototipo web funcional</p></div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Registro de cliente</h3>
+          <p>Captura nombres, documento, teléfono y correo para mantener trazabilidad del prospecto.</p>
+        </div>
+        <div class="card">
+          <h3>Interés inmobiliario</h3>
+          <p>Permite registrar el proyecto, torre, unidad, tipo de inmueble y precio ofertado.</p>
+        </div>
+        <div class="card">
+          <h3>Asignación comercial</h3>
+          <p>Asocia cada lead a un vendedor, canal y etapa de seguimiento del funnel.</p>
+        </div>
+      </div>
+      <div class="callout warning">
+        <strong>Alcance documentado:</strong> esta sección cierra la capa de aplicación como prototipo funcional de interfaz. La conexión productiva a Azure SQL / Fabric debe validarse con la versión final desarrollada por el equipo.
       </div>
     </section>
 
     <section>
-      <h2>Vista general del flujo comercial</h2>
+      <h2>Flujo operativo de la aplicación</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <span>1</span>
+          <h4>Captura del lead</h4>
+          <p>El usuario registra al cliente potencial y su canal de origen.</p>
+        </div>
+        <div class="flow-step">
+          <span>2</span>
+          <h4>Unidad de interés</h4>
+          <p>Se selecciona proyecto, torre, unidad, tipo de inmueble y precio ofertado.</p>
+        </div>
+        <div class="flow-step">
+          <span>3</span>
+          <h4>Asignación</h4>
+          <p>El lead se deriva a un asesor comercial responsable de la gestión.</p>
+        </div>
+        <div class="flow-step">
+          <span>4</span>
+          <h4>Seguimiento</h4>
+          <p>Se actualiza la etapa del lead hasta concretar o descartar la oportunidad.</p>
+        </div>
+        <div class="flow-step">
+          <span>5</span>
+          <h4>Analítica</h4>
+          <p>La información alimenta el pipeline, Warehouse y dashboard de Power BI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Demo visual de la interfaz</h2>
       <p>
-        El siguiente diagrama resume el recorrido operativo del proceso comercial inmobiliario, desde la configuración inicial del proyecto y los canales de captación hasta el registro del cliente, la generación del lead, la negociación y el cierre del contrato.
+        La siguiente maqueta interactiva resume la experiencia esperada de la aplicación. Permite simular el registro de leads y visualizar una bandeja operativa con datos alineados a la tabla <strong>Lead_Venta</strong> del modelo relacional.
       </p>
-      <div class="image-frame flow-overview">
-        <img src="../assets/img/Flujograma_Comercial_Actualizado.svg" alt="Flujograma general del proceso comercial inmobiliario" />
-        <p class="caption">Vista general del flujo comercial del proyecto, utilizada como referencia para estructurar las aplicaciones operativas y los agentes propuestos.</p>
-      </div>
 
-      <div class="flow-phase-text-grid">
-        <div class="flow-phase-card">
-          <h3>Fase 0 · Configuración inicial</h3>
-          <p class="muted">Comprende el registro de proyecto, torres, tipos de unidad, unidades y estados base para dejar listo el portafolio inmobiliario.</p>
+      <div class="app-shell">
+        <div class="app-toolbar">
+          <strong>Inmobiliaria Mayo · Registro Comercial</strong>
+          <span class="app-status">● Prototipo local</span>
         </div>
-        <div class="flow-phase-card">
-          <h3>Fase 1 · Configuración de canales</h3>
-          <p class="muted">Define la estructura de captación comercial, distinguiendo entre canales propios y externos, y entre atención presencial y virtual.</p>
-        </div>
-        <div class="flow-phase-card">
-          <h3>Fase 2 · Captación por canal</h3>
-          <p class="muted">El cliente ingresa por un canal presencial o virtual. Ambos recorridos alimentan el mismo proceso comercial de registro y seguimiento.</p>
-        </div>
-        <div class="flow-phase-card">
-          <h3>Fase 3 a Fase 7 · Lead, negociación y cierre</h3>
-          <p class="muted">Se registra el cliente, se asigna el vendedor, se genera el lead, se valida la unidad, se negocia el precio y se formaliza el contrato final.</p>
+        <div class="app-body">
+          <div class="app-panel">
+            <h3>Nuevo lead</h3>
+            <form class="app-form" id="leadForm">
+              <div class="form-row">
+                <label>Cliente
+                  <input type="text" id="cliente" value="María Torres" />
+                </label>
+                <label>Documento
+                  <input type="text" id="documento" value="76234581" />
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Teléfono
+                  <input type="text" id="telefono" value="987654321" />
+                </label>
+                <label>Correo
+                  <input type="email" id="correo" value="cliente@email.com" />
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Proyecto
+                  <select id="proyecto">
+                    <option>Villa Verde</option>
+                    <option>Costa Primavera</option>
+                    <option>Llanos del Plano</option>
+                    <option>Mirador del Sol</option>
+                  </select>
+                </label>
+                <label>Unidad de interés
+                  <select id="unidad">
+                    <option>Torre 1 · Dpto 1204</option>
+                    <option>Torre 2 · Dpto 804</option>
+                    <option>Torre Norte · Dpto 603</option>
+                    <option>Torre Sur · Dpto 1502</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Canal
+                  <select id="canal">
+                    <option>Sala de Ventas</option>
+                    <option>Página Web</option>
+                    <option>Portales Inmobiliarios</option>
+                    <option>Redes Sociales</option>
+                    <option>Corredores</option>
+                  </select>
+                </label>
+                <label>Asesor asignado
+                  <select id="asesor">
+                    <option>María Fernanda Salinas</option>
+                    <option>Daniela Torres</option>
+                    <option>Alonso Quispe</option>
+                    <option>Sebastián Castillo</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Precio ofertado
+                  <input type="number" id="precio" value="518500" />
+                </label>
+                <label>Descuento ofrecido
+                  <input type="number" id="descuento" value="4500" />
+                </label>
+              </div>
+              <label>Observación comercial
+                <textarea id="observacion">Cliente interesado en unidad de 2 dormitorios. Solicita evaluación de financiamiento.</textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Registrar lead demo</button>
+              <p class="prototype-note">Los registros de esta demo se guardan solo en el navegador mediante localStorage.</p>
+            </form>
+          </div>
+
+          <div class="app-preview">
+            <h3>Bandeja de leads</h3>
+            <div class="stage-tabs">
+              <span class="stage-tab active">Nuevo</span>
+              <span class="stage-tab">Asignado</span>
+              <span class="stage-tab">En seguimiento</span>
+              <span class="stage-tab">Contrato</span>
+            </div>
+            <div class="table-wrap">
+              <table class="app-table">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Proyecto</th>
+                    <th>Canal</th>
+                    <th>Asesor</th>
+                    <th>Oferta</th>
+                  </tr>
+                </thead>
+                <tbody id="leadTable"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Aplicaciones operativas del flujo comercial</h2>
+      <h2>Correspondencia con el modelo de datos</h2>
       <p>
-        A partir del flujograma se estructuraron tres aplicaciones clave: registro del cliente, selección del departamento y asignación comercial. Cada aplicación se vincula conceptualmente con las tablas del modelo G5 implementado en SQL, Warehouse y Power BI.
+        La aplicación se diseñó para capturar información compatible con las entidades definidas en el Data Layer. De esta manera, el registro operativo puede integrarse posteriormente con Azure SQL, Fabric Data Factory, Fabric Warehouse y Power BI.
       </p>
-      <div class="app-stack">
-        <div class="app-row-card">
-          <div class="app-row-head">
-            <div class="app-row-badge">Aplicación 1</div>
-            <div>
-              <h3>Registro del Cliente</h3>
-              <p class="muted">Relaciona <strong>G5.Clientes</strong>, <strong>G5.Canales</strong> y <strong>G5.Lead_Venta</strong>. Su objetivo es capturar los datos del interesado y crear el lead inicial.</p>
-            </div>
-          </div>
-          <form id="formCliente" class="crm-form form-grid-3">
-            <label>Tipo de documento
-              <select name="tipo_documento" required>
-                <option value="DNI">DNI</option>
-                <option value="CE">CE</option>
-                <option value="Pasaporte">Pasaporte</option>
-              </select>
-            </label>
-            <label>Número de documento<input name="num_documento" required /></label>
-            <label>Canal de origen<select id="canalCliente" name="canal_id" required></select></label>
-            <label>Nombres<input name="nombres" required /></label>
-            <label>Apellidos<input name="apellidos" required /></label>
-            <label>Teléfono<input name="telefono" required /></label>
-            <label>Email<input type="email" name="email" required /></label>
-            <label>Fecha de registro<input type="date" name="fecha_registro" required /></label>
-            <label>Urgencia
-              <select name="urgencia" required>
-                <option value="Alta">Alta</option>
-                <option value="Media">Media</option>
-                <option value="Baja">Baja</option>
-              </select>
-            </label>
-            <label class="span-2">Presupuesto inicial (S/)
-              <input type="number" name="presupuesto" min="0" step="1000" required />
-            </label>
-            <div class="full"><button type="submit" class="btn btn-primary">Guardar cliente y crear lead inicial</button></div>
-          </form>
-          <p id="registroResultado" class="prototype-note"></p>
-        </div>
-
-        <div class="app-row-card">
-          <div class="app-row-head">
-            <div class="app-row-badge">Aplicación 2</div>
-            <div>
-              <h3>Selección de Departamento</h3>
-              <p class="muted">Relaciona <strong>G5.Proyectos</strong>, <strong>G5.Torres</strong>, <strong>G5.Unidades</strong>, <strong>G5.Tipos_Unidad</strong> y <strong>G5.Estado_Unidad</strong>. Permite vincular la unidad al lead.</p>
-            </div>
-          </div>
-          <form id="formUnidad" class="crm-form form-grid-3">
-            <label>Lead<select id="leadUnidad" name="lead_id" required></select></label>
-            <label>Proyecto<select id="filtroProyecto" name="proyecto_id"></select></label>
-            <label>Torre<select id="filtroTorre" name="torre_id"></select></label>
-            <label>Tipo de unidad<select id="filtroTipoUnidad" name="tipo_unidad_id"></select></label>
-            <label>Habitaciones
-              <select id="filtroHabitaciones" name="habitaciones">
-                <option value="">Todas</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </label>
-            <label>Presupuesto máximo (S/)<input type="number" id="filtroPresupuesto" name="presupuesto_max" min="0" step="1000" /></label>
-            <label>Descuento ofrecido (S/)<input type="number" name="descuento" min="0" step="500" value="0" /></label>
-            <div class="full"><button type="button" id="btnFiltrarUnidades" class="btn btn-secondary">Filtrar unidades disponibles</button></div>
-            <label class="span-2">Unidad disponible<select id="unidadDisponible" name="unidad_id" required></select></label>
-            <label>Precio lista (S/)<input type="number" id="precioLista" readonly /></label>
-            <label>Precio ofertado (S/)<input type="number" id="precioOfertado" readonly /></label>
-            <div class="full"><button type="submit" class="btn btn-primary">Asociar unidad al lead</button></div>
-          </form>
-          <p id="unidadResultado" class="prototype-note"></p>
-        </div>
-
-        <div class="app-row-card">
-          <div class="app-row-head">
-            <div class="app-row-badge">Aplicación 3</div>
-            <div>
-              <h3>Asignación Comercial</h3>
-              <p class="muted">Relaciona <strong>G5.Vendedores</strong> y <strong>G5.Lead_Venta</strong>. Permite asignar el asesor responsable y dejar trazabilidad de la gestión inicial.</p>
-            </div>
-          </div>
-          <form id="formAsignacion" class="crm-form form-grid-3">
-            <label>Lead<select id="leadAsignacion" name="lead_id" required></select></label>
-            <label>Cliente<input id="asigCliente" readonly /></label>
-            <label>Canal<input id="asigCanal" readonly /></label>
-            <label>Proyecto de interés<input id="asigProyecto" readonly /></label>
-            <label>Prioridad
-              <select id="asigPrioridad" name="prioridad" required>
-                <option value="Alta">Alta</option>
-                <option value="Media">Media</option>
-                <option value="Baja">Baja</option>
-              </select>
-            </label>
-            <label>Asesor sugerido<select id="asesorSugerido" name="vendedor_id" required></select></label>
-            <label>Estado de gestión
-              <select name="estado_gestion" required>
-                <option value="Asignado">Asignado</option>
-                <option value="En gestión">En gestión</option>
-                <option value="Seguimiento">Seguimiento</option>
-              </select>
-            </label>
-            <label class="span-2">Observaciones<textarea name="observaciones" placeholder="Observaciones comerciales"></textarea></label>
-            <div class="full"><button type="submit" class="btn btn-primary">Asignar asesor</button></div>
-          </form>
-          <p id="asignacionResultado" class="prototype-note"></p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Agentes funcionales propuestos</h2>
-      <p class="lead">
-        Se implementaron mockups funcionales de agentes sobre reglas simples en JavaScript para representar cómo podría operar una capa inteligente de soporte comercial. La lógica está preparada para evolucionar luego a servicios más avanzados conectados a APIs o modelos externos.
-      </p>
-      <div class="agent-grid">
-        <div class="agent-card-clean">
-          <span class="agent-tag">Agente 1</span>
-          <h3>Calificador de Leads</h3>
-          <p class="muted">Evalúa probabilidad y prioridad del lead según canal, urgencia, presupuesto e interés por unidad.</p>
-          <div class="agent-meta">
-            <span><strong>Entradas:</strong> canal, urgencia, presupuesto, unidad</span>
-            <span><strong>Salida:</strong> score y prioridad</span>
-          </div>
-          <div class="crm-form">
-            <label>Lead a evaluar<select id="agLeadId"></select></label>
-            <button type="button" id="btnCalificarLead" class="btn btn-secondary">Calificar lead</button>
-          </div>
-          <div id="agLeadSalida" class="agent-output"></div>
-        </div>
-
-        <div class="agent-card-clean">
-          <span class="agent-tag">Agente 2</span>
-          <h3>Recomendador de Unidades</h3>
-          <p class="muted">Sugiere la unidad más conveniente según presupuesto, habitaciones, distrito y preferencia del cliente.</p>
-          <div class="agent-meta">
-            <span><strong>Entradas:</strong> presupuesto, habitaciones, distrito</span>
-            <span><strong>Salida:</strong> unidad sugerida y justificación</span>
-          </div>
-          <form id="formAgenteUnidad" class="crm-form">
-            <label>Presupuesto máximo (S/)<input type="number" name="presupuesto_max" required /></label>
-            <label>Habitaciones
-              <select name="habitaciones" required><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-            </label>
-            <label>Distrito / zona<select id="agDistrito" name="distrito" required></select></label>
-            <label>Preferencia<input name="preferencia" placeholder="Ejemplo: piso alto o mayor metraje" /></label>
-            <button type="submit" class="btn btn-secondary">Recomendar unidad</button>
-          </form>
-          <div id="agUnidadSalida" class="agent-output"></div>
-        </div>
-
-        <div class="agent-card-clean">
-          <span class="agent-tag">Agente 3</span>
-          <h3>Asignador de Asesor</h3>
-          <p class="muted">Selecciona el asesor más conveniente según prioridad, proyecto de interés y carga comercial simulada.</p>
-          <div class="agent-meta">
-            <span><strong>Entradas:</strong> lead, prioridad, proyecto</span>
-            <span><strong>Salida:</strong> asesor recomendado y siguiente acción</span>
-          </div>
-          <form id="formAgenteAsesor" class="crm-form">
-            <label>Lead<select id="agLeadAsesor" name="lead_id" required></select></label>
-            <label>Prioridad
-              <select name="prioridad" required>
-                <option value="Alta">Alta</option>
-                <option value="Media">Media</option>
-                <option value="Baja">Baja</option>
-              </select>
-            </label>
-            <button type="submit" class="btn btn-secondary">Asignar asesor recomendado</button>
-          </form>
-          <div id="agAsesorSalida" class="agent-output"></div>
-        </div>
-      </div>
-
-      <div class="future-agent-grid">
-        <div class="card">
-          <h3>Agente futuro · Seguimiento</h3>
-          <p>Podría programar recordatorios, secuencias de contacto y alertas de inactividad por lead o vendedor.</p>
-        </div>
-        <div class="card">
-          <h3>Agente futuro · Negociación</h3>
-          <p>Podría sugerir bandas de descuento y contraofertas según proyecto, margen y comportamiento histórico.</p>
-        </div>
-        <div class="card">
-          <h3>Agente futuro · Alertas de cierre</h3>
-          <p>Podría anticipar riesgo de caída del contrato y advertir si una unidad debe volver a disponible.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Bandeja de leads asignados</h2>
-      <p class="muted">Vista consolidada de leads generados, su unidad vinculada y el asesor comercial responsable.</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Lead</th>
-              <th>Cliente</th>
-              <th>Canal</th>
-              <th>Proyecto</th>
-              <th>Unidad</th>
-              <th>Asesor</th>
-              <th>Prioridad</th>
-              <th>Estado</th>
+              <th>Pantalla / módulo</th>
+              <th>Tabla relacionada</th>
+              <th>Campos de negocio</th>
+              <th>Uso analítico posterior</th>
             </tr>
           </thead>
-          <tbody id="tablaLeadsAsignados"></tbody>
+          <tbody>
+            <tr>
+              <td>Registro de cliente</td>
+              <td>Clientes</td>
+              <td>Documento, nombres, teléfono, correo y fecha de registro.</td>
+              <td>Identificar prospectos y analizar recurrencia de clientes.</td>
+            </tr>
+            <tr>
+              <td>Unidad de interés</td>
+              <td>Unidades, Torres, Proyectos, Tipos_Unidad</td>
+              <td>Proyecto, torre, unidad, tipo, metraje y precio de lista/oferta.</td>
+              <td>Medir demanda por proyecto, tipo de unidad, torre y precio.</td>
+            </tr>
+            <tr>
+              <td>Asignación comercial</td>
+              <td>Vendedores, Canales, Lead_Venta</td>
+              <td>Asesor responsable, canal de origen, costo del lead y fecha de inicio.</td>
+              <td>Comparar rendimiento por vendedor, canal y etapa del funnel.</td>
+            </tr>
+            <tr>
+              <td>Cierre / contrato</td>
+              <td>Contratos, Estado_Contrato</td>
+              <td>Fecha de venta, precio final, descuento final y estado vigente.</td>
+              <td>Calcular ventas, contratos vigentes y ratio de conversión.</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </section>
 
-    <section>
-      <h2>Prompt sugerido para continuar en Cursor</h2>
-      <p>
-        Si deseas evolucionar estos agentes a una versión más completa, el repositorio incluye un prompt base para Cursor en el archivo <strong>CURSOR_PROMPT_AGENTES.md</strong>. Ese prompt solicita mejorar la UI, mantener el estilo de la web, conectar endpoints reales y añadir componentes visuales para cada aplicación y agente.
-      </p>
-      <div class="callout success">
-        <strong>Recomendación:</strong> usar este prototipo como base de presentación y luego iterarlo en Cursor hacia una versión con backend real, persistencia y autenticación.
-      </div>
-    </section>
   </main>
 
   <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
-  <script src="../assets/js/app.js"></script>
+
+  <script>
+    const defaultLeads = [
+      { cliente: 'María Torres', proyecto: 'Villa Verde', canal: 'Sala de Ventas', asesor: 'María Fernanda Salinas', oferta: 'S/ 518,500' },
+      { cliente: 'Carlos Mejía', proyecto: 'Mirador del Sol', canal: 'Página Web', asesor: 'Daniela Torres', oferta: 'S/ 441,500' },
+      { cliente: 'Lucía Rojas', proyecto: 'Costa Primavera', canal: 'Redes Sociales', asesor: 'Alonso Quispe', oferta: 'S/ 665,000' }
+    ];
+
+    const storageKey = 'inmobiliariaMayoLeadsDemo';
+    const table = document.getElementById('leadTable');
+    const form = document.getElementById('leadForm');
+
+    function getLeads() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || defaultLeads;
+      } catch (error) {
+        return defaultLeads;
+      }
+    }
+
+    function saveLeads(leads) {
+      localStorage.setItem(storageKey, JSON.stringify(leads));
+    }
+
+    function money(value) {
+      return 'S/ ' + Number(value || 0).toLocaleString('es-PE');
+    }
+
+    function renderLeads() {
+      const leads = getLeads();
+      table.innerHTML = leads.slice(-6).reverse().map((lead) => `
+        <tr>
+          <td>${lead.cliente}</td>
+          <td>${lead.proyecto}</td>
+          <td>${lead.canal}</td>
+          <td>${lead.asesor}</td>
+          <td>${lead.oferta}</td>
+        </tr>
+      `).join('');
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const leads = getLeads();
+      leads.push({
+        cliente: document.getElementById('cliente').value || 'Cliente demo',
+        proyecto: document.getElementById('proyecto').value,
+        canal: document.getElementById('canal').value,
+        asesor: document.getElementById('asesor').value,
+        oferta: money(document.getElementById('precio').value)
+      });
+      saveLeads(leads);
+      renderLeads();
+    });
+
+    renderLeads();
+  </script>
 </body>
 </html>
