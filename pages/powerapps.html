@@ -34,275 +34,187 @@
 
     <section>
       <span class="eyebrow">Capa 2 · Aplicación comercial</span>
-      <h2>Prototipo web para registro y gestión de leads</h2>
+      <h2>Aplicaciones propuestas para el proceso comercial inmobiliario</h2>
       <p class="lead">
-        Para representar la capa de aplicación del proyecto, se documenta un prototipo web desarrollado con apoyo de Cursor. Su objetivo es cubrir el flujo operativo de registro comercial: datos del cliente, unidad inmobiliaria de interés, canal de origen y asesor responsable.
+        A partir del flujograma operativo del proceso de venta, la capa de aplicación se organiza en tres módulos: registro del cliente, selección de departamento y asignación del asesor de ventas. Esta división permite cubrir el flujo desde la captación del lead hasta su derivación comercial y posterior análisis en el modelo de datos.
       </p>
       <div class="grid-3">
         <div class="card">
-          <h3>Registro de cliente</h3>
-          <p>Captura nombres, documento, teléfono y correo para mantener trazabilidad del prospecto.</p>
+          <h3>Aplicación 1 · Registro del cliente</h3>
+          <p>Captura los datos del prospecto y el canal por el que llegó: sala de ventas, web, redes, portal inmobiliario o feria.</p>
         </div>
         <div class="card">
-          <h3>Interés inmobiliario</h3>
-          <p>Permite registrar el proyecto, torre, unidad, tipo de inmueble y precio ofertado.</p>
+          <h3>Aplicación 2 · Selección de departamento</h3>
+          <p>Permite consultar proyectos, torres y unidades disponibles para vincular una unidad de interés al lead.</p>
         </div>
         <div class="card">
-          <h3>Asignación comercial</h3>
-          <p>Asocia cada lead a un vendedor, canal y etapa de seguimiento del funnel.</p>
+          <h3>Aplicación 3 · Asignación comercial</h3>
+          <p>Deriva el lead a un vendedor, registra prioridad de atención y deja la oportunidad lista para seguimiento.</p>
         </div>
       </div>
-      <div class="callout warning">
-        <strong>Alcance documentado:</strong> esta sección cierra la capa de aplicación como prototipo funcional de interfaz. La conexión productiva a Azure SQL / Fabric debe validarse con la versión final desarrollada por el equipo.
+      <div class="callout">
+        <strong>Alcance:</strong> esta página documenta el diseño funcional de la capa de aplicación, alineado al modelo SQL y al flujo comercial. La versión productiva puede implementarse como aplicación web desarrollada en Cursor y conectarse posteriormente a Azure SQL o Fabric.
       </div>
     </section>
 
     <section>
-      <h2>Flujo operativo de la aplicación</h2>
-      <div class="flow">
-        <div class="flow-step">
-          <span>1</span>
-          <h4>Captura del lead</h4>
-          <p>El usuario registra al cliente potencial y su canal de origen.</p>
-        </div>
-        <div class="flow-step">
-          <span>2</span>
-          <h4>Unidad de interés</h4>
-          <p>Se selecciona proyecto, torre, unidad, tipo de inmueble y precio ofertado.</p>
-        </div>
-        <div class="flow-step">
-          <span>3</span>
-          <h4>Asignación</h4>
-          <p>El lead se deriva a un asesor comercial responsable de la gestión.</p>
-        </div>
-        <div class="flow-step">
-          <span>4</span>
-          <h4>Seguimiento</h4>
-          <p>Se actualiza la etapa del lead hasta concretar o descartar la oportunidad.</p>
-        </div>
-        <div class="flow-step">
-          <span>5</span>
-          <h4>Analítica</h4>
-          <p>La información alimenta el pipeline, Warehouse y dashboard de Power BI.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Demo visual de la interfaz</h2>
+      <h2>Flujograma operativo depurado</h2>
       <p>
-        La siguiente maqueta interactiva resume la experiencia esperada de la aplicación. Permite simular el registro de leads y visualizar una bandeja operativa con datos alineados a la tabla <strong>Lead_Venta</strong> del modelo relacional.
+        El flujo fue reorganizado para mostrar de forma ejecutiva cómo la inmobiliaria configura su oferta, capta clientes, registra leads, asigna asesores, negocia la unidad de interés y actualiza el estado del contrato. Se retiraron elementos visuales informales para mantener una presentación consistente con el GitHub Pages del proyecto.
       </p>
+      <div class="image-frame">
+        <img src="../assets/img/Flujograma_Comercial_Presentable.svg" alt="Flujograma comercial presentable de Inmobiliaria Mayo" />
+        <p class="caption">Flujograma operativo del proceso comercial inmobiliario, desde la configuración de proyectos y unidades hasta el cierre de contrato.</p>
+      </div>
+    </section>
 
-      <div class="app-shell">
-        <div class="app-toolbar">
-          <strong>Inmobiliaria Mayo · Registro Comercial</strong>
-          <span class="app-status">● Prototipo local</span>
-        </div>
-        <div class="app-body">
-          <div class="app-panel">
-            <h3>Nuevo lead</h3>
-            <form class="app-form" id="leadForm">
-              <div class="form-row">
-                <label>Cliente
-                  <input type="text" id="cliente" value="María Torres" />
-                </label>
-                <label>Documento
-                  <input type="text" id="documento" value="76234581" />
-                </label>
-              </div>
-              <div class="form-row">
-                <label>Teléfono
-                  <input type="text" id="telefono" value="987654321" />
-                </label>
-                <label>Correo
-                  <input type="email" id="correo" value="cliente@email.com" />
-                </label>
-              </div>
-              <div class="form-row">
-                <label>Proyecto
-                  <select id="proyecto">
-                    <option>Villa Verde</option>
-                    <option>Costa Primavera</option>
-                    <option>Llanos del Plano</option>
-                    <option>Mirador del Sol</option>
-                  </select>
-                </label>
-                <label>Unidad de interés
-                  <select id="unidad">
-                    <option>Torre 1 · Dpto 1204</option>
-                    <option>Torre 2 · Dpto 804</option>
-                    <option>Torre Norte · Dpto 603</option>
-                    <option>Torre Sur · Dpto 1502</option>
-                  </select>
-                </label>
-              </div>
-              <div class="form-row">
-                <label>Canal
-                  <select id="canal">
-                    <option>Sala de Ventas</option>
-                    <option>Página Web</option>
-                    <option>Portales Inmobiliarios</option>
-                    <option>Redes Sociales</option>
-                    <option>Corredores</option>
-                  </select>
-                </label>
-                <label>Asesor asignado
-                  <select id="asesor">
-                    <option>María Fernanda Salinas</option>
-                    <option>Daniela Torres</option>
-                    <option>Alonso Quispe</option>
-                    <option>Sebastián Castillo</option>
-                  </select>
-                </label>
-              </div>
-              <div class="form-row">
-                <label>Precio ofertado
-                  <input type="number" id="precio" value="518500" />
-                </label>
-                <label>Descuento ofrecido
-                  <input type="number" id="descuento" value="4500" />
-                </label>
-              </div>
-              <label>Observación comercial
-                <textarea id="observacion">Cliente interesado en unidad de 2 dormitorios. Solicita evaluación de financiamiento.</textarea>
-              </label>
-              <button class="btn btn-primary" type="submit">Registrar lead demo</button>
-              <p class="prototype-note">Los registros de esta demo se guardan solo en el navegador mediante localStorage.</p>
-            </form>
+    <section>
+      <h2>Diseño de las tres aplicaciones</h2>
+      <p>
+        La propuesta divide la experiencia operativa en tres interfaces simples. Cada una responde a una etapa específica del proceso y se relaciona con las tablas creadas en la capa de datos.
+      </p>
+      <div class="app-grid">
+        <div class="app-mockup">
+          <div class="mockup-header">
+            <strong>Aplicación 1</strong>
+            <span>Registro del cliente</span>
           </div>
+          <div class="mockup-body">
+            <label>Tipo de documento<input value="DNI" readonly /></label>
+            <label>Número de documento<input value="76234581" readonly /></label>
+            <label>Nombres y apellidos<input value="María Torres Salazar" readonly /></label>
+            <label>Teléfono<input value="987654321" readonly /></label>
+            <label>Correo<input value="cliente@email.com" readonly /></label>
+            <label>Canal de origen<input value="Página Web" readonly /></label>
+            <div class="mockup-action">Crear cliente y lead inicial</div>
+          </div>
+        </div>
 
-          <div class="app-preview">
-            <h3>Bandeja de leads</h3>
-            <div class="stage-tabs">
-              <span class="stage-tab active">Nuevo</span>
-              <span class="stage-tab">Asignado</span>
-              <span class="stage-tab">En seguimiento</span>
-              <span class="stage-tab">Contrato</span>
-            </div>
-            <div class="table-wrap">
-              <table class="app-table">
-                <thead>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Proyecto</th>
-                    <th>Canal</th>
-                    <th>Asesor</th>
-                    <th>Oferta</th>
-                  </tr>
-                </thead>
-                <tbody id="leadTable"></tbody>
-              </table>
-            </div>
+        <div class="app-mockup">
+          <div class="mockup-header">
+            <strong>Aplicación 2</strong>
+            <span>Selección de departamento</span>
+          </div>
+          <div class="mockup-body">
+            <label>Proyecto<input value="Mirador del Sol" readonly /></label>
+            <label>Torre<input value="Torre 1" readonly /></label>
+            <label>Tipo de unidad<input value="Flat 2 dormitorios" readonly /></label>
+            <label>Unidad disponible<input value="Dpto 1204" readonly /></label>
+            <label>Precio lista<input value="S/ 518,500" readonly /></label>
+            <label>Descuento ofertado<input value="S/ 4,500" readonly /></label>
+            <div class="mockup-action">Vincular unidad al lead</div>
+          </div>
+        </div>
+
+        <div class="app-mockup">
+          <div class="mockup-header">
+            <strong>Aplicación 3</strong>
+            <span>Asignación comercial</span>
+          </div>
+          <div class="mockup-body">
+            <label>Lead<input value="LD-000245" readonly /></label>
+            <label>Asesor asignado<input value="María Fernanda Salinas" readonly /></label>
+            <label>Estado de gestión<input value="Asignado" readonly /></label>
+            <label>Prioridad<input value="Alta" readonly /></label>
+            <label>Fecha de asignación<input value="09/05/2026" readonly /></label>
+            <label>Observación<input value="Solicita evaluación de financiamiento" readonly /></label>
+            <div class="mockup-action">Enviar a seguimiento comercial</div>
           </div>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Correspondencia con el modelo de datos</h2>
-      <p>
-        La aplicación se diseñó para capturar información compatible con las entidades definidas en el Data Layer. De esta manera, el registro operativo puede integrarse posteriormente con Azure SQL, Fabric Data Factory, Fabric Warehouse y Power BI.
-      </p>
+      <h2>Relación entre aplicaciones y tablas del modelo</h2>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Pantalla / módulo</th>
-              <th>Tabla relacionada</th>
-              <th>Campos de negocio</th>
-              <th>Uso analítico posterior</th>
+              <th>Aplicación</th>
+              <th>Objetivo operativo</th>
+              <th>Tablas relacionadas</th>
+              <th>Salida para analítica</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Registro de cliente</td>
-              <td>Clientes</td>
-              <td>Documento, nombres, teléfono, correo y fecha de registro.</td>
-              <td>Identificar prospectos y analizar recurrencia de clientes.</td>
+              <td>Registro del cliente</td>
+              <td>Capturar datos del prospecto y canal de llegada.</td>
+              <td>G5.Clientes, G5.Canales, G5.Propiedad_Canal</td>
+              <td>Permite analizar volumen de leads por canal y perfil de cliente.</td>
             </tr>
             <tr>
-              <td>Unidad de interés</td>
-              <td>Unidades, Torres, Proyectos, Tipos_Unidad</td>
-              <td>Proyecto, torre, unidad, tipo, metraje y precio de lista/oferta.</td>
-              <td>Medir demanda por proyecto, tipo de unidad, torre y precio.</td>
+              <td>Selección de departamento</td>
+              <td>Consultar unidades disponibles y registrar la unidad de interés.</td>
+              <td>G5.Proyectos, G5.Torres, G5.Unidades, G5.Tipos_Unidad, G5.Estado_Unidad</td>
+              <td>Permite medir demanda por proyecto, torre, tipo de unidad y precio.</td>
             </tr>
             <tr>
               <td>Asignación comercial</td>
-              <td>Vendedores, Canales, Lead_Venta</td>
-              <td>Asesor responsable, canal de origen, costo del lead y fecha de inicio.</td>
-              <td>Comparar rendimiento por vendedor, canal y etapa del funnel.</td>
+              <td>Asignar asesor y crear la oportunidad en la tabla central.</td>
+              <td>G5.Vendedores, G5.Lead_Venta</td>
+              <td>Permite evaluar rendimiento por asesor, canal y etapa del funnel.</td>
             </tr>
             <tr>
-              <td>Cierre / contrato</td>
-              <td>Contratos, Estado_Contrato</td>
-              <td>Fecha de venta, precio final, descuento final y estado vigente.</td>
-              <td>Calcular ventas, contratos vigentes y ratio de conversión.</td>
+              <td>Cierre de contrato</td>
+              <td>Registrar aceptación, contrato, vigencia y estado de la unidad.</td>
+              <td>G5.Contratos, G5.Estado_Contrato, G5.Estado_Unidad</td>
+              <td>Permite calcular contratos vigentes, ventas y ratio de conversión comercial.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
+    <section>
+      <h2>Agentes propuestos a partir del flujo</h2>
+      <p>
+        El flujograma también permite identificar oportunidades para automatizar tareas comerciales mediante agentes especializados. Estos agentes no reemplazan al equipo comercial, sino que reducen tareas manuales, priorizan leads y generan alertas accionables.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Agente de calificación de leads</h3>
+          <p>Evalúa canal de origen, presupuesto, proyecto de interés y urgencia para clasificar el lead como alta, media o baja prioridad.</p>
+        </div>
+        <div class="card">
+          <h3>Agente recomendador de unidades</h3>
+          <p>Sugiere departamentos disponibles según presupuesto, tipo de unidad, piso, metraje, proyecto y disponibilidad comercial.</p>
+        </div>
+        <div class="card">
+          <h3>Agente de asignación comercial</h3>
+          <p>Deriva leads al asesor más adecuado considerando carga actual, desempeño histórico, canal y proyecto asignado.</p>
+        </div>
+        <div class="card">
+          <h3>Agente de seguimiento</h3>
+          <p>Detecta leads sin gestión, oportunidades estancadas o clientes que requieren contacto posterior y genera recordatorios.</p>
+        </div>
+        <div class="card">
+          <h3>Agente de negociación</h3>
+          <p>Revisa descuentos ofrecidos, precio lista y reglas comerciales para alertar cuando una oferta se aleja de los rangos esperados.</p>
+        </div>
+        <div class="card">
+          <h3>Agente de cierre y alertas</h3>
+          <p>Monitorea contratos pendientes de pago, contratos anulados y unidades que deben cambiar de estado en el inventario.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cómo aporta esta capa al dashboard</h2>
+      <p>
+        Las tres aplicaciones capturan la información necesaria para alimentar la tabla <strong>Lead_Venta</strong>, que luego es procesada por Fabric Data Factory, consolidada en Fabric Warehouse y explotada en Power BI. De esta forma, cada interacción comercial queda trazable y puede convertirse en indicadores como leads totales, contratos vigentes, conversión por canal, ventas por proyecto y rendimiento por asesor.
+      </p>
+      <div class="flow">
+        <div class="flow-step"><span>1</span><h4>Cliente</h4><p>Registra datos y canal de origen.</p></div>
+        <div class="flow-step"><span>2</span><h4>Unidad</h4><p>Selecciona proyecto, torre y departamento.</p></div>
+        <div class="flow-step"><span>3</span><h4>Asesor</h4><p>Recibe el lead y gestiona la oportunidad.</p></div>
+        <div class="flow-step"><span>4</span><h4>Warehouse</h4><p>Centraliza los datos procesados.</p></div>
+        <div class="flow-step"><span>5</span><h4>Power BI</h4><p>Presenta indicadores y storytelling comercial.</p></div>
+      </div>
+    </section>
+
   </main>
 
   <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
-
-  <script>
-    const defaultLeads = [
-      { cliente: 'María Torres', proyecto: 'Villa Verde', canal: 'Sala de Ventas', asesor: 'María Fernanda Salinas', oferta: 'S/ 518,500' },
-      { cliente: 'Carlos Mejía', proyecto: 'Mirador del Sol', canal: 'Página Web', asesor: 'Daniela Torres', oferta: 'S/ 441,500' },
-      { cliente: 'Lucía Rojas', proyecto: 'Costa Primavera', canal: 'Redes Sociales', asesor: 'Alonso Quispe', oferta: 'S/ 665,000' }
-    ];
-
-    const storageKey = 'inmobiliariaMayoLeadsDemo';
-    const table = document.getElementById('leadTable');
-    const form = document.getElementById('leadForm');
-
-    function getLeads() {
-      try {
-        return JSON.parse(localStorage.getItem(storageKey)) || defaultLeads;
-      } catch (error) {
-        return defaultLeads;
-      }
-    }
-
-    function saveLeads(leads) {
-      localStorage.setItem(storageKey, JSON.stringify(leads));
-    }
-
-    function money(value) {
-      return 'S/ ' + Number(value || 0).toLocaleString('es-PE');
-    }
-
-    function renderLeads() {
-      const leads = getLeads();
-      table.innerHTML = leads.slice(-6).reverse().map((lead) => `
-        <tr>
-          <td>${lead.cliente}</td>
-          <td>${lead.proyecto}</td>
-          <td>${lead.canal}</td>
-          <td>${lead.asesor}</td>
-          <td>${lead.oferta}</td>
-        </tr>
-      `).join('');
-    }
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const leads = getLeads();
-      leads.push({
-        cliente: document.getElementById('cliente').value || 'Cliente demo',
-        proyecto: document.getElementById('proyecto').value,
-        canal: document.getElementById('canal').value,
-        asesor: document.getElementById('asesor').value,
-        oferta: money(document.getElementById('precio').value)
-      });
-      saveLeads(leads);
-      renderLeads();
-    });
-
-    renderLeads();
-  </script>
 </body>
 </html>

@@ -223,3 +223,68 @@ tr:last-child td { border-bottom: 0; }
   .app-body { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* Aplicaciones propuestas por flujo comercial */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+.app-mockup {
+  background: #ffffff;
+  border: 1px solid #d8e7fb;
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.mockup-header {
+  background: linear-gradient(135deg, var(--primary-3), var(--primary));
+  color: #ffffff;
+  padding: 15px 16px;
+  display: grid;
+  gap: 3px;
+}
+.mockup-header strong {
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.mockup-header span {
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+.mockup-body {
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+.mockup-body label {
+  display: grid;
+  gap: 5px;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+.mockup-body input {
+  width: 100%;
+  border: 1px solid #dbe5f2;
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 9px 10px;
+  color: var(--text);
+  font: inherit;
+}
+.mockup-action {
+  margin-top: 4px;
+  background: #e8f1ff;
+  color: var(--primary);
+  border: 1px solid #c8dcf7;
+  border-radius: 999px;
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 900;
+}
+@media (max-width: 980px) {
+  .app-grid { grid-template-columns: 1fr; }
+}
