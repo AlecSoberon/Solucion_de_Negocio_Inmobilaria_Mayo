@@ -33,23 +33,106 @@
   <main class="container">
     <section>
       <span class="eyebrow">Capa 2 · Aplicación comercial</span>
-      <h2>Mockup ejecutivo de aplicaciones y agentes comerciales</h2>
+      <h2>Aplicaciones operativas y agentes para el flujo comercial</h2>
       <p class="lead">
-        Esta versión implementa una aplicación web funcional en modo mockup para el flujo comercial inmobiliario. Opera sin backend, con datos simulados y funciones desacopladas para facilitar la posterior conexión a endpoints sobre Azure SQL.
+        Esta sección documenta la capa de aplicación del proyecto con base en el flujo real de venta inmobiliaria. Se presenta el proceso funcional, tres aplicaciones que acompañan el registro y gestión del lead, y un conjunto de agentes mockup diseñados para apoyar la calificación, recomendación y asignación comercial.
       </p>
       <div class="kpi-strip">
         <div class="mini-card"><strong class="big" id="kpiClientes">0</strong><p class="muted">clientes simulados</p></div>
         <div class="mini-card"><strong class="big" id="kpiLeads">0</strong><p class="muted">leads activos</p></div>
         <div class="mini-card"><strong class="big" id="kpiUnidades">0</strong><p class="muted">unidades disponibles</p></div>
         <div class="mini-card"><strong class="big" id="kpiAsignados">0</strong><p class="muted">leads asignados</p></div>
-        <div class="mini-card"><strong class="big">Mockup</strong><p class="muted">modo local sin credenciales</p></div>
+        <div class="mini-card"><strong class="big">Demo</strong><p class="muted">prototipo web funcional</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Flujograma funcional del proceso comercial</h2>
+      <p>
+        Se tomó como referencia el diagrama operativo del proceso inmobiliario y se organizó visualmente para mostrar con claridad las etapas de configuración, captación, registro, generación del lead, negociación, cierre y validación post venta. El flujo conecta directamente con las tablas del modelo <strong>G5</strong> implementado en SQL, Warehouse y Power BI.
+      </p>
+
+      <div class="image-frame flow-overview">
+        <img src="../assets/img/Flujograma_DiagramsNet.png" alt="Flujograma funcional del proceso comercial inmobiliario" />
+        <p class="caption">Vista general del flujo comercial: desde la configuración del proyecto y la captación por canal hasta la generación del contrato y el estado final de la venta.</p>
+      </div>
+
+      <div class="flow-phase-grid">
+        <div class="detail-card">
+          <img src="../assets/img/Flujograma_Fases_0_2.png" alt="Detalle de configuración inicial del flujo comercial" />
+          <h3>Configuración inicial</h3>
+          <p class="muted">Comprende el registro del proyecto, torres, tipos de unidad, unidades y canales de captación antes de iniciar la atención comercial.</p>
+        </div>
+        <div class="detail-card">
+          <img src="../assets/img/Flujograma_Canal_Presencial.png" alt="Detalle del canal presencial del flujo comercial" />
+          <h3>Captación presencial</h3>
+          <p class="muted">Incluye visita a sala, atención del vendedor, recorrido por piloto y asesoría comercial presencial.</p>
+        </div>
+        <div class="detail-card">
+          <img src="../assets/img/Flujograma_Canal_Virtual.png" alt="Detalle del canal virtual del flujo comercial" />
+          <h3>Captación virtual</h3>
+          <p class="muted">Incluye contacto digital, registro automático, tour virtual y asesoría remota hasta completar los datos del interesado.</p>
+        </div>
+        <div class="detail-card">
+          <img src="../assets/img/Flujograma_Lead_Cierre.png" alt="Detalle de lead, negociación y cierre comercial" />
+          <h3>Lead, negociación y cierre</h3>
+          <p class="muted">Consolida el registro del cliente, la generación del lead, la asignación de unidad, la negociación y el cierre contractual.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card">
+          <h3>Fases del flujo</h3>
+          <p>Fase 0 a Fase 7: configuración, canales, captación, registro unificado, lead, negociación, contrato y validación post venta.</p>
+        </div>
+        <div class="card">
+          <h3>Tablas involucradas</h3>
+          <p>G5.Proyectos, Torres, Tipos_Unidad, Unidades, Clientes, Vendedores, Canales, Lead_Venta, Contratos y Estados.</p>
+        </div>
+        <div class="card">
+          <h3>Propósito</h3>
+          <p>Modelar el recorrido comercial completo y facilitar su traducción a aplicaciones operativas y agentes de apoyo a ventas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tres aplicaciones del flujo comercial</h2>
+      <p>
+        A partir del flujograma se definieron tres aplicaciones alineadas al proceso operativo. Cada una representa un punto clave del recorrido del lead y se conecta conceptualmente con las tablas del modelo de datos.
+      </p>
+      <div class="app-summary-grid">
+        <div class="app-summary-card">
+          <div class="app-summary-step">01</div>
+          <div>
+            <h3>Registro del cliente</h3>
+            <p class="muted">Captura los datos personales y crea el lead inicial a partir del canal de origen.</p>
+          </div>
+        </div>
+        <div class="app-summary-card">
+          <div class="app-summary-step">02</div>
+          <div>
+            <h3>Selección del departamento</h3>
+            <p class="muted">Permite filtrar proyectos, torres y unidades disponibles, y vincular la unidad al lead.</p>
+          </div>
+        </div>
+        <div class="app-summary-card">
+          <div class="app-summary-step">03</div>
+          <div>
+            <h3>Asignación comercial</h3>
+            <p class="muted">Asigna un asesor de ventas y define la prioridad y el estado inicial de gestión.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="crm-layout">
       <div class="crm-card">
-        <h3>Aplicación 1 · Registro del Cliente</h3>
-        <p class="muted">Relaciona G5.Clientes, G5.Canales y G5.Lead_Venta.</p>
+        <div class="app-card-head">
+          <span class="app-badge">Aplicación 1</span>
+          <h3>Registro del Cliente</h3>
+          <p class="muted">Relaciona G5.Clientes, G5.Canales y G5.Lead_Venta.</p>
+        </div>
         <form id="formCliente" class="crm-form">
           <label>Tipo de documento
             <select name="tipo_documento" required>
@@ -81,8 +164,11 @@
       </div>
 
       <div class="crm-card">
-        <h3>Aplicación 2 · Selección de Departamento</h3>
-        <p class="muted">Relaciona G5.Proyectos, G5.Torres, G5.Unidades, G5.Tipos_Unidad y G5.Estado_Unidad.</p>
+        <div class="app-card-head">
+          <span class="app-badge">Aplicación 2</span>
+          <h3>Selección de Departamento</h3>
+          <p class="muted">Relaciona G5.Proyectos, G5.Torres, G5.Unidades, G5.Tipos_Unidad y G5.Estado_Unidad.</p>
+        </div>
         <form id="formUnidad" class="crm-form">
           <label>Lead<select id="leadUnidad" name="lead_id" required></select></label>
           <label>Proyecto<select id="filtroProyecto" name="proyecto_id"></select></label>
@@ -108,8 +194,11 @@
       </div>
 
       <div class="crm-card">
-        <h3>Aplicación 3 · Asignación Comercial</h3>
-        <p class="muted">Relaciona G5.Vendedores y G5.Lead_Venta.</p>
+        <div class="app-card-head">
+          <span class="app-badge">Aplicación 3</span>
+          <h3>Asignación Comercial</h3>
+          <p class="muted">Relaciona G5.Vendedores y G5.Lead_Venta.</p>
+        </div>
         <form id="formAsignacion" class="crm-form">
           <label>Lead<select id="leadAsignacion" name="lead_id" required></select></label>
           <label>Cliente<input id="asigCliente" readonly /></label>
@@ -138,33 +227,62 @@
     </section>
 
     <section>
-      <h2>Agentes funcionales en modo mockup</h2>
-      <div class="crm-layout">
-        <div class="crm-card">
-          <h3>Agente 1 · Calificador de Leads</h3>
-          <p class="muted">Calcula score 0-100 y sugiere prioridad.</p>
-          <label>Lead a evaluar<select id="agLeadId"></select></label>
-          <button type="button" id="btnCalificarLead" class="btn btn-secondary">Calificar lead</button>
+      <h2>Agentes funcionales propuestos</h2>
+      <p>
+        Se implementaron mockups funcionales de agentes sobre reglas simples en JavaScript para representar cómo podría operar una capa inteligente de soporte comercial. La lógica está preparada para evolucionar luego a servicios más avanzados conectados a APIs o modelos externos.
+      </p>
+
+      <div class="agent-row">
+        <div class="agent-card">
+          <div class="agent-card-head">
+            <span class="agent-kicker">Agente 1</span>
+            <h3>Calificador de Leads</h3>
+            <p class="muted">Evalúa probabilidad y prioridad del lead según canal, urgencia, presupuesto e interés por unidad.</p>
+          </div>
+          <div class="agent-meta">
+            <span>Entradas: canal, urgencia, presupuesto, unidad</span>
+            <span>Salida: score y prioridad</span>
+          </div>
+          <div class="agent-controls">
+            <label>Lead a evaluar<select id="agLeadId"></select></label>
+            <button type="button" id="btnCalificarLead" class="btn btn-secondary">Calificar lead</button>
+          </div>
           <div id="agLeadSalida" class="agent-output"></div>
         </div>
-        <div class="crm-card">
-          <h3>Agente 2 · Recomendador de Unidades</h3>
-          <p class="muted">Recomienda unidad según presupuesto, habitaciones, zona y preferencia.</p>
-          <form id="formAgenteUnidad" class="crm-form">
+
+        <div class="agent-card">
+          <div class="agent-card-head">
+            <span class="agent-kicker">Agente 2</span>
+            <h3>Recomendador de Unidades</h3>
+            <p class="muted">Sugiere la unidad más conveniente según presupuesto, habitaciones, distrito y preferencia del cliente.</p>
+          </div>
+          <div class="agent-meta">
+            <span>Entradas: presupuesto, habitaciones, distrito</span>
+            <span>Salida: unidad sugerida y justificación</span>
+          </div>
+          <form id="formAgenteUnidad" class="crm-form compact-form">
             <label>Presupuesto máximo (S/)<input type="number" name="presupuesto_max" required /></label>
             <label>Habitaciones
               <select name="habitaciones" required><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
             </label>
             <label>Distrito / zona<select id="agDistrito" name="distrito" required></select></label>
-            <label>Preferencia (Piso o metraje)<input name="preferencia" placeholder="Ejemplo: piso alto o mayor metraje" /></label>
+            <label>Preferencia<input name="preferencia" placeholder="Ejemplo: piso alto o mayor metraje" /></label>
             <button type="submit" class="btn btn-secondary">Recomendar unidad</button>
           </form>
           <div id="agUnidadSalida" class="agent-output"></div>
         </div>
-        <div class="crm-card">
-          <h3>Agente 3 · Asignador de Asesor</h3>
-          <p class="muted">Sugiere asesor por prioridad, proyecto, canal y carga simulada.</p>
-          <form id="formAgenteAsesor" class="crm-form">
+
+        <div class="agent-card">
+          <div class="agent-card-head">
+            <span class="agent-kicker">Agente 3</span>
+            <h3>Asignador de Asesor</h3>
+            <p class="muted">Selecciona el asesor más conveniente según prioridad, proyecto de interés y carga comercial simulada.</p>
+          </div>
+          <div class="agent-meta">
+            <span>Entradas: lead, prioridad, proyecto</span>
+            <span>Salida: asesor recomendado y siguiente acción</span>
+          </div>
+          <form id="formAgenteAsesor" class="crm-form compact-form">
             <label>Lead<select id="agLeadAsesor" name="lead_id" required></select></label>
             <label>Prioridad
               <select name="prioridad" required>
@@ -178,10 +296,26 @@
           <div id="agAsesorSalida" class="agent-output"></div>
         </div>
       </div>
+
+      <div class="grid-3" style="margin-top: 18px;">
+        <div class="card">
+          <h3>Agente futuro · Seguimiento</h3>
+          <p>Podría programar recordatorios, secuencias de contacto y alertas de inactividad por lead o vendedor.</p>
+        </div>
+        <div class="card">
+          <h3>Agente futuro · Negociación</h3>
+          <p>Podría sugerir bandas de descuento y contraofertas según proyecto, margen y comportamiento histórico.</p>
+        </div>
+        <div class="card">
+          <h3>Agente futuro · Alertas de cierre</h3>
+          <p>Podría anticipar riesgo de caída del contrato y advertir si una unidad debe volver a disponible.</p>
+        </div>
+      </div>
     </section>
 
     <section>
       <h2>Bandeja de leads asignados</h2>
+      <p class="muted">Vista consolidada de leads generados, su unidad vinculada y el asesor comercial responsable.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -202,20 +336,12 @@
     </section>
 
     <section>
-      <h2>Flujo visual del proceso comercial</h2>
-      <div class="crm-flow-grid">
-        <div class="flow-step"><span>1</span><p>Configuración del proyecto inmobiliario</p></div>
-        <div class="flow-step"><span>2</span><p>Registro de proyectos, torres, tipos de unidad y unidades</p></div>
-        <div class="flow-step"><span>3</span><p>Definición de canales de captación</p></div>
-        <div class="flow-step"><span>4</span><p>Llegada del cliente por canal presencial o virtual</p></div>
-        <div class="flow-step"><span>5</span><p>Registro del cliente</p></div>
-        <div class="flow-step"><span>6</span><p>Creación del lead de venta</p></div>
-        <div class="flow-step"><span>7</span><p>Validación de interés por unidad</p></div>
-        <div class="flow-step"><span>8</span><p>Verificación de disponibilidad</p></div>
-        <div class="flow-step"><span>9</span><p>Negociación</p></div>
-        <div class="flow-step"><span>10</span><p>Creación de contrato</p></div>
-        <div class="flow-step"><span>11</span><p>Cambio de estado de unidad a vendida si contrato vigente</p></div>
-        <div class="flow-step"><span>12</span><p>Anulación y retorno de unidad a disponible si no continúa</p></div>
+      <h2>Prompt sugerido para continuar en Cursor</h2>
+      <p>
+        Si deseas evolucionar estos agentes a una versión más completa, el repositorio incluye un prompt base para Cursor en el archivo <strong>CURSOR_PROMPT_AGENTES.md</strong>. Ese prompt solicita mejorar la UI, mantener el estilo de la web, conectar endpoints reales y añadir componentes visuales para cada aplicación y agente.
+      </p>
+      <div class="callout success">
+        <strong>Recomendación:</strong> usar este prototipo como base de presentación y luego iterarlo en Cursor hacia una versión con backend real, persistencia y autenticación.
       </div>
     </section>
   </main>

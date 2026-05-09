@@ -362,3 +362,160 @@ tr:last-child td { border-bottom: 0; }
   .crm-layout { grid-template-columns: 1fr; }
   .crm-flow-grid { grid-template-columns: 1fr; }
 }
+
+/* PowerApps / Aplicación - mejora visual del flujo y agentes */
+.flow-overview img {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+.flow-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+.detail-card {
+  background: #f8fbff;
+  border: 1px solid #d8e7fb;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--shadow-soft);
+}
+.detail-card img {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #dfebf8;
+  background: white;
+}
+.detail-card h3 {
+  margin: 14px 0 6px;
+}
+.app-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+.app-summary-card {
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  border: 1px solid #d8e7fb;
+  border-radius: 18px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 14px;
+  align-items: start;
+  box-shadow: var(--shadow-soft);
+}
+.app-summary-step {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+.app-summary-card h3 {
+  margin: 2px 0 6px;
+}
+.app-card-head {
+  margin-bottom: 10px;
+}
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e8f1ff;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.agent-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 18px;
+}
+.agent-card {
+  background: #ffffff;
+  border: 1px solid #d8e7fb;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 100%;
+}
+.agent-card-head h3 {
+  margin: 6px 0 6px;
+}
+.agent-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef6ff;
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+.agent-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.agent-meta span {
+  background: #f5f9ff;
+  border: 1px solid #d8e7fb;
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.agent-controls {
+  display: grid;
+  gap: 10px;
+}
+.agent-controls label,
+.compact-form label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.88rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+.compact-form {
+  gap: 10px;
+}
+.agent-output {
+  margin-top: auto;
+  min-height: 136px;
+}
+@media (max-width: 1080px) {
+  .flow-phase-grid,
+  .app-summary-grid,
+  .agent-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 780px) {
+  .flow-phase-grid,
+  .app-summary-grid,
+  .agent-row {
+    grid-template-columns: 1fr;
+  }
+  .app-summary-card {
+    grid-template-columns: 56px 1fr;
+  }
+}
