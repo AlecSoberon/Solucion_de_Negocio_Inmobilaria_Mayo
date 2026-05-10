@@ -1,6 +1,6 @@
 # Grupo 05 · Inmobiliaria Mayo
 
-Portafolio web del proyecto de análisis del ratio de conversión comercial para Inmobiliaria Mayo, desarrollado para el curso Business Analytics 2026-Enero de la PUCP.
+Portafolio web del proyecto de análisis del ratio de conversión comercial para Inmobiliaria Mayo, desarrollado para el curso Business Analytics 2026-Marzo de la PUCP.
 
 ## Objetivo
 
