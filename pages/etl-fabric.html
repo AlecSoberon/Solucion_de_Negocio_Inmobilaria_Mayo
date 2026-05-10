@@ -158,6 +158,71 @@
     </section>
 
     <section>
+      <h2>Programación automática y notificaciones reales</h2>
+      <p>
+        Para fortalecer el monitoreo operativo, el pipeline principal fue configurado con una programación diaria. Esta programación permite ejecutar el flujo de forma recurrente y enviar notificaciones automáticas sobre el resultado del proceso.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Frecuencia programada</h3>
+          <p>El pipeline principal se programó para ejecutarse todos los días a las <strong>03:33 a.m.</strong>, hora local, dejando evidencia de operación automática dentro de Microsoft Fabric.</p>
+        </div>
+        <div class="card">
+          <h3>Monitoreo por correo</h3>
+          <p>La ejecución puede finalizar con notificación de éxito o error, permitiendo revisar rápidamente si las tablas fueron actualizadas correctamente o si se requiere intervención.</p>
+        </div>
+      </div>
+      <div class="image-frame" style="margin-top: 18px;">
+        <img src="../assets/img/Programacion_Pipeline_Principal.png" alt="Programación diaria del pipeline principal en Fabric" />
+        <p class="caption">Programación diaria del pipeline principal configurada en Microsoft Fabric.</p>
+      </div>
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="image-frame">
+          <img src="../assets/img/Correo_Exito_Real_Redactado.png" alt="Correo real de actualización exitosa" />
+          <p class="caption">Correo de notificación de éxito: confirma que la actualización de tablas finalizó correctamente.</p>
+        </div>
+        <div class="image-frame">
+          <img src="../assets/img/Correo_Error_Real_Redactado.png" alt="Correo real de error en actualización" />
+          <p class="caption">Correo de notificación de error: alerta cuando el pipeline identifica fallas en la actualización.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pipeline 2: control de conteo de registros</h2>
+      <p>
+        Como complemento al proceso de carga, se implementó un segundo pipeline orientado al control operativo. Este flujo ejecuta un notebook que consulta las tablas del esquema G5, calcula el número de registros por tabla y envía un correo con el consolidado de resultados.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Objetivo</h3>
+          <p>Validar que las tablas cargadas tengan información disponible y que el conteo de registros pueda ser revisado de forma periódica.</p>
+        </div>
+        <div class="card">
+          <h3>Componente central</h3>
+          <p>El notebook <strong>FINAL Notebook_GRUPO_5_CONTEO_REGISTROS_V6</strong> realiza el conteo y construye el resumen para notificación.</p>
+        </div>
+        <div class="card">
+          <h3>Programación</h3>
+          <p>El pipeline de conteo fue programado para ejecutarse diariamente a las <strong>03:03 p.m.</strong>, hora local.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="image-frame">
+          <img src="../assets/img/Pipeline_Conteo_Registros.png" alt="Pipeline de conteo de registros" />
+          <p class="caption">Vista general del pipeline de conteo de registros, compuesto por un notebook de control operativo.</p>
+        </div>
+        <div class="image-frame">
+          <img src="../assets/img/Programacion_Pipeline_Conteo.png" alt="Programación diaria del pipeline de conteo" />
+          <p class="caption">Programación diaria del pipeline de conteo de registros en Microsoft Fabric.</p>
+        </div>
+      </div>
+      <div class="callout success">
+        <strong>Resultado:</strong> este control permite monitorear la disponibilidad de datos por tabla y recibir un resumen automático con los registros cargados.
+      </div>
+    </section>
+
+    <section>
       <h2>Componentes del pipeline</h2>
       <div class="table-wrap">
         <table>
@@ -260,6 +325,12 @@
               <td>Notifica fallas de actualización y facilita la revisión del proceso.</td>
               <td>Ruta de error del pipeline.</td>
             </tr>
+            <tr>
+              <td>Notebook conteo de registros</td>
+              <td>Control operativo</td>
+              <td>Realiza el conteo de registros por tabla y notifica los resultados obtenidos.</td>
+              <td>Pipeline 2 de monitoreo.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -268,7 +339,7 @@
     <section>
       <h2>Validación del proceso ETL</h2>
       <p>
-        La validación del pipeline se concentra en asegurar que las tablas sean cargadas en el orden correcto y que las dependencias entre llaves se mantengan consistentes. Por ello, el flujo prioriza la carga de catálogos y entidades base antes de procesar tablas dependientes como Unidades, Lead_Venta y Contratos.
+        La validación del proceso ETL se orienta a verificar tanto la correcta ejecución de la carga como la disponibilidad de información en las tablas monitoreadas. Además del orden de ejecución del pipeline principal, se incorporó un control de conteo de registros para supervisar el estado de las tablas luego de la carga.
       </p>
       <div class="grid-3">
         <div class="card">
@@ -276,35 +347,57 @@
           <p>Las tablas sin dependencias se procesan primero para evitar errores de integridad referencial.</p>
         </div>
         <div class="card">
-          <h3>Consistencia relacional</h3>
-          <p>El diseño respeta las relaciones del modelo SQL: proyecto, torre, unidad, lead y contrato.</p>
+          <h3>Conteo de registros</h3>
+          <p>El notebook de control obtiene el total de registros por tabla y consolida los resultados para revisión operativa.</p>
         </div>
         <div class="card">
-          <h3>Monitoreo</h3>
-          <p>El pipeline incorpora rutas de éxito y error mediante notebooks de notificación.</p>
+          <h3>Monitoreo y notificación</h3>
+          <p>Los resultados se comunican mediante correo, facilitando el seguimiento continuo de las cargas de datos.</p>
         </div>
+      </div>
+      <div class="table-wrap" style="margin-top: 18px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Validación</th>
+              <th>Descripción</th>
+              <th>Resultado esperado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Disponibilidad de datos</td>
+              <td>Verifica que las tablas evaluadas presenten registros disponibles para análisis.</td>
+              <td>Tablas con registros actualizados después de la carga.</td>
+            </tr>
+            <tr>
+              <td>Integridad operativa</td>
+              <td>Identifica tablas sin registros o con cantidades inusuales de información.</td>
+              <td>Alertas o revisión de tablas con comportamiento atípico.</td>
+            </tr>
+            <tr>
+              <td>Comunicación automática</td>
+              <td>Envía el consolidado de conteos y estado de ejecución mediante notificación por correo.</td>
+              <td>Seguimiento oportuno del proceso ETL sin revisión manual constante.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
     <section>
       <h2>Aporte al modelo analítico</h2>
       <p>
-        Esta capa deja la información preparada para la explotación analítica en Power BI. Al consolidar los datos de leads, clientes, canales, unidades, proyectos y contratos, se habilitan indicadores como leads generados, ventas realizadas, precio de venta, costo por lead, conversión por canal, desempeño por asesor y evolución comercial por periodo.
+        Esta capa deja la información preparada para la explotación analítica en Power BI y agrega un control operativo sobre las cargas de datos. Al consolidar los datos de leads, clientes, canales, unidades, proyectos y contratos, se habilitan indicadores como leads generados, ventas realizadas, precio de venta, costo por lead, conversión por canal, desempeño por asesor y evolución comercial por periodo.
       </p>
       <div class="callout success">
-        <strong>Resultado:</strong> la capa ETL conecta la base operacional con la capa de warehouse y presentación, permitiendo que los dashboards se construyan sobre información ordenada, relacionada y lista para análisis.
+        <strong>Resultado:</strong> la capa ETL conecta la base operacional con el warehouse y la capa de presentación, incorporando además monitoreo programado, conteo de registros y notificaciones automáticas para asegurar la trazabilidad del proceso.
       </div>
     </section>
 
-    <section>
-      <h2>Pendientes para reforzar la evidencia</h2>
-      <div class="callout warning">
-        <strong>Opcional:</strong> agregar una captura del historial de ejecución exitosa del pipeline y una captura del destino final en Fabric Warehouse para complementar la evidencia de carga.
-      </div>
-    </section>
 
   </main>
 
-  <div class="footer">PUCP · Business Analytics 2026-Enero · Portafolio web del proyecto final</div>
+  <div class="footer">PUCP · Business Analytics 2026-Marzo · Portafolio web del proyecto final</div>
 </body>
 </html>
