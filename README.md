@@ -29,17 +29,8 @@ assets/
 
 La sección de aplicación documenta tres módulos derivados del flujograma operativo: registro del cliente, selección de departamento y asignación comercial. También incluye una propuesta de agentes para calificación de leads, recomendación de unidades, asignación de asesores, seguimiento, negociación y cierre.
 
-## Publicación
-
-El sitio se publica con GitHub Pages desde la rama `main`.
-
 ## Pendientes recomendados
 
 - Validar que el enlace embebido de Power BI/Fabric siga activo.
 - Validar la conexión productiva de las tres aplicaciones propuestas con Azure SQL o Fabric cuando el equipo entregue la versión final.
 - Evitar publicar credenciales, tokens o app passwords en notebooks o capturas.
-
-
-## Actualización Fabric
-
-Se incorporó evidencia de programación automática de pipelines, correos de éxito/error y un pipeline adicional de conteo de registros para monitoreo operativo de las tablas.
